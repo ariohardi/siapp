@@ -1,0 +1,1 @@
+[{"p":7,"m":"37.421998333333335,-122.08400000000002","j":"lokasi","t":"2017-01-23 01:44:15"},{"p":11,"m":"Assalamualaikum bang Luqman","j":"false","t":"2017-01-24 17:17:12"},{"p":11,"m":"Ini aang bang","j":"false","t":"2017-01-24 17:17:22"},{"p":11,"m":"Ngetest chating aja \ud83d\ude02 \ud83d\ude02 \ud83d\ude02 \ud83d\ude02 \ud83d\ude02","j":"false","t":"2017-01-24 17:17:49"}]

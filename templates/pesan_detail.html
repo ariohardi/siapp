@@ -1,0 +1,41 @@
+<!-- saved from url=(0044)http://rdash.github.io/templates/tables.html -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div class="row">
+<div class="col-md-8 col-md-offset-2">
+<rd-widget>
+<rd-widget-header icon="fa-envelope" title="{{widget_title}}">
+<a href="#/pesan">Kembali</a>
+</rd-widget-header>
+<rd-widget-body classes="no-padding" loading="{{loading}}">
+	<br/>
+	<div class="row">
+		<div class="col-md-6">
+			<label>Perihal</label>
+			<p ng-bind="detail.perihal"></p>
+		</div>
+		<div class="col-md-6">
+			<label>Tanggal Kirim</label>
+			<p ng-bind="mydatetime(detail.tgl_buat)"></p>
+		</div>
+		<div class="col-md-6">
+			<label>Penerima</label>
+			<p ng-bind="penerima[intval(detail.penerima)]"></p>
+		</div>
+		<div class="col-md-6">
+			<label>Total Penerima</label>
+			<p ng-bind="(detail.total_penerima | number:0)+' personil'"></p>
+		</div>
+		<div class="col-md-12">
+			<label>Detail Instruksi</label>
+			<p ng-bind="detail.isi_pesan"></p>
+		</div>
+	</div>
+</rd-widget-body>
+</div>
+</div>
+</body>
+</html>

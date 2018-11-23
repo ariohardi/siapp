@@ -1,0 +1,69 @@
+<!-- saved from url=(0044)http://rdash.github.io/templates/tables.html -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div class="row">
+<div class="col-lg-12">
+<rd-widget>
+<rd-widget-header icon="fa-user" title="Absensi Personil">
+<a target="_blank" href="/siapp_new/api/index.php/printing/data_absensi?{{query_string}}&export=excel" class="btn btn-default btn-sm"><i class="fa fa-file-excel-o"></i>Ekspor Excel</a>
+<a target="_blank" href="/siapp_new/api/index.php/printing/data_absensi?{{query_string}}" class="btn btn-default btn-sm"><i class="fa fa-print"></i>Cetak</a>
+</rd-widget-header>
+<rd-widget-body classes="large no-padding" loading="{{loading}}">
+<div class="table-responsive">
+<table class="table">
+<thead>
+	<tr>
+		<th class="text-center">#</th>
+		<th>Tanggal</th>
+		<th>Nama</th>
+		<th>Regu</th>
+		<th>Masuk</th>
+		<th>Keluar</th>
+		<th>Durasi</th>
+	</tr>
+</thead>
+<tbody>
+	<tr ng-repeat="absensi in array_absensi">
+		<th class="text-center" ng-bind="$index+1"></th>
+		<td ng-bind="absensi.tanggal"></td>
+		<td ng-bind="absensi.nama_personil"></td>
+		<td ng-bind="absensi.nama_regu"></td>
+		<td ng-bind="absensi.jam_masuk"></td>
+		<td ng-bind="absensi.jam_pulang"></td>
+		<td ng-bind="absensi.durasi"></td>
+	</tr>
+</tbody>
+</table>
+</div>
+</rd-widget-body>
+<rd-widget-footer>
+<p class="text-right pull-right" style="margin-left:6.5em"></p>
+<p class="text-right pull-right" style="margin-top:4px">Total <span ng-bind="totalDurasi"></span> jam</p>
+<p class="text-right pull-right" style="margin-left:9.5em"></p>
+<p class="text-right pull-right" style="margin-top:4px">Total <span ng-bind="array_absensi.length"></span> absen</p>
+<span style="margin-top: 4px;" class="pull-left"><i class="fa fa-filter"></i> Filter</span>
+<div class="row">
+	<div class="col-md-3" style="margin-bottom: -10px;margin-top: 0px;">
+		<input ng-keyup="cari()" placeholder="Ketik nama personil" class="form-control input-sm" type="text" ng-model="filter.keyword">
+	</div>
+	<div class="col-md-2" style="margin-bottom: -10px;margin-top: 0px;">
+		<div id="cuppaDatePicker">
+        	<cuppa-datepicker on-date-select="ganti_tanggal_awal(selectedDate)" ng-model="filter.tanggal_awal" big-banner="true" format="DD/MM/YYYY"></cuppa-datepicker>
+		</div>
+	</div>
+<span style="margin-top: 4px;" class="pull-left"> - </span>
+	<div class="col-md-2" style="margin-bottom: -10px;margin-top: 0px;">
+		<div id="cuppaDatePicker">
+        	<cuppa-datepicker on-date-select="ganti_tanggal_akhir(selectedDate)" ng-model="filter.tanggal_akhir" big-banner="true" format="DD/MM/YYYY"></cuppa-datepicker>
+		</div>
+	</div>
+</div>
+</rd-widget-footer>
+</rd-widget>
+</div>
+</div>
+</body>
+</html>

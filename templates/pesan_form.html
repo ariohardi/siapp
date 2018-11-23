@@ -1,0 +1,71 @@
+<!-- saved from url=(0044)http://rdash.github.io/templates/tables.html -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div class="row">
+<div class="col-md-12">
+<rd-widget>
+<form ng-submit="submit()">
+<rd-widget-header icon="fa-envelope" title="{{widget_title}}">
+<a href="#/pesan">Batal</a>
+</rd-widget-header>
+<rd-widget-body classes="no-padding">
+	<br/>
+	<div class="row" ng-hide="persen==0">
+		<div class="col-md-6 col-md-offset-3">
+			<h5>Mengunggah lampiran..</h5>
+			<div class="progress">
+			  	<div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="persen" aria-valuemin="0" aria-valuemax="100" style="width: {{persen}}%;">
+			    	{{persen}}%
+			  	</div>
+			</div>
+			<p ng-show="remaining>0" style="margin-top: -18px;" class="text-right"><small>Sekitar {{remaining}} detik lagi</small></p>
+			<p ng-show="remaining==0" style="margin-top: -18px;" class="text-right"><small>Selesai</small></p>
+		</div>
+	</div>
+	<div class="row" ng-show="persen==0">
+		<div class="col-md-6">
+			<rd-widget-form-group label="Perihal">
+				<input ng-required="true" type="text" class="form-control" ng-model="FormData.perihal">
+			</rd-widget-form-group>
+			<rd-widget-form-group label="Penerima">
+				<select ng-required="true" class="form-control" ng-model="FormData.penerima">
+					<option value="" ng-bind="'Tentukan penerima'"></option>
+					<option value="1" ng-bind="'Semua Personil'"></option>
+					<option value="2" ng-bind="'Semua Satpam'"></option>
+					<option value="3" ng-bind="'Semua Komandan Regu'"></option>
+					<option value="4" ng-bind="'Semua Chief Security'"></option>
+					<option value="5" ng-bind="'Komandan dan Chief Security'"></option>
+				</select>
+			</rd-widget-form-group>
+			<rd-widget-form-group label="Detail Instruksi">
+				<textarea rows="5" ng-required="true" class="form-control" ng-model="FormData.isi_pesan"></textarea>
+			</rd-widget-form-group>
+		</div>
+		<div class="col-md-6">
+			<label>Lampiran</label>
+			<p ng-show="lampiran_temp.length==0">
+				Anda belum menambahkan lampiran
+			</p>
+			<ul class="list-group" ng-show="lampiran_temp.length > 0">
+				<!-- <span class="badge">14</span> -->
+				<li ng-repeat="attach in lampiran_temp" class="list-group-item">
+					{{attach[0]}}
+					<img style="margin-top: -6px;" class="pull-right" width="28" src="icon/{{attach[1]}}.png">
+				</li>
+			</ul>
+			<div ng-hide="lampiran_asli.length==5" class="btn btn-default btn-sm" ngf-select="upload($file)"><i class="fa fa-paperclip"></i> Tambahkan Lampiran</div>
+		</div>
+	</div>
+</rd-widget-body>
+<rd-widget-footer ng-hide="loading">
+<button class="btn btn-success" ng-bind="'Submit'"></button>
+</rd-widget-footer>
+</rd-widget>
+</form>
+</div>
+</div>
+</body>
+</html>

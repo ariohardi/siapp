@@ -1,0 +1,165 @@
+<!-- saved from url=(0044)http://rdash.github.io/templates/tables.html -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+	#map {
+    	position: relative;
+	}
+
+	#map:after {
+	    width: 22px;
+	    height: 40px;
+	    display: block;
+	    content: ' ';
+	    position: absolute;
+	    top: 50%; left: 50%;
+	    margin: -40px 0 0 -11px;
+	    background: url('https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi_hdpi.png');
+	    background-size: 22px 40px; /* Since I used the HiDPI marker version this compensates for the 2x size */
+	    pointer-events: none; /* This disables clicks on the marker. Not fully supported by all major browsers, though */
+	}
+</style>
+</head>
+<body>
+<div class="row">
+<div class="col-md-12">
+<rd-widget>
+<form ng-submit="submit()">
+<rd-widget-header icon="fa-sitemap" title="{{widget_title}}">
+<a href="#/klien">Batal</a>
+</rd-widget-header>
+<rd-widget-body classes="no-padding" loading="{{loading}}">
+	<br/>
+	<div class="row">
+		<div class="col-md-6">
+			<h4 style="margin: 0px 0px 20px 0px;" class="text-orange text-bold">Data Persuahaan</h4>
+			<rd-widget-form-group label="Nama Klien">
+				<input ng-required="true" type="text" class="form-control" ng-model="FormData.nama_klien">
+			</rd-widget-form-group>
+			<rd-widget-form-group label="Nama Direktur">
+				<input ng-required="true" type="text" class="form-control" ng-model="FormData.direktur">
+			</rd-widget-form-group>
+			<rd-widget-form-group label="Propinsi">
+				<select ng-change="ganti_propinsi()" ng-required="true" class="form-control" ng-model="FormData.propinsi">
+					<option value="" ng-bind="'Pilih propinsi'"></option>
+					<option ng-repeat="propinsi in array_propinsi" value="{{propinsi.ID}}" ng-bind="propinsi.nama_propinsi"></option>
+				</select>
+			</rd-widget-form-group>
+			<rd-widget-form-group label="Kota / Kabupaten">
+				<select ng-required="FormData.propinsi" ng-disabled="!FormData.propinsi" class="form-control" ng-model="FormData.kabupaten">
+					<option value="" ng-bind="'Pilih kabupaten'"></option>
+					<option ng-repeat="kabupaten in array_kabupaten" value="{{kabupaten.ID}}" ng-bind="kabupaten.nama_kabupaten"></option>
+				</select>
+			</rd-widget-form-group>
+			<rd-widget-form-group label="Alamat Lengkap">
+				<textarea rows="5" ng-required="true" class="form-control" ng-model="FormData.alamat"></textarea>
+			</rd-widget-form-group>
+			<rd-widget-form-group label="Nomor Telepon">
+				<input type="text" class="form-control" ng-model="FormData.telepon">
+			</rd-widget-form-group>
+			<rd-widget-form-group label="Fax">
+				<input type="text" class="form-control" ng-model="FormData.fax">
+			</rd-widget-form-group>
+			<rd-widget-form-group label="Alamat Email Perusahaan">
+				<input type="text" class="form-control" ng-model="FormData.email">
+			</rd-widget-form-group>
+		</div>
+		<div class="col-md-6">
+			<h4 style="margin: 0px 0px 20px 0px;" class="text-orange text-bold">Perjanjian Kerjasama</h4>
+			<rd-widget-form-group label="Pola Jam Kerja">
+				<select ng-change="pilih_pola_jam_kerja()" ng-required="true" class="form-control" ng-model="FormData.pola_jam_kerja">
+					<option value="">Pilih pola jam kerja</option>
+					<option value="8">Pola 8 jam</option>
+					<option value="12">Pola 12 jam</option>
+				</select>
+			</rd-widget-form-group>
+			<rd-widget-form-group label="Shift Kerja">
+				<input ng-readonly="true" type="text" class="form-control" ng-model="FormData.shift_kerja">
+			</rd-widget-form-group>
+			<rd-widget-form-group label="Jml. Hari Kerja / Bulan">
+				<input ng-required="true" type="number" class="form-control" ng-model="FormData.hari_kerja">
+			</rd-widget-form-group>
+			<rd-widget-form-group label="Jam Kerja / Hari">
+				<input ng-required="true" type="number" class="form-control" ng-model="FormData.jam_kerja">
+			</rd-widget-form-group>
+			<div class="row" style="padding: 0px;">
+				<div class="col-md-6" style="padding: 0px 5px 0px 0px;">
+					<label>Salary Chief Security</label>
+					<div class="input-group">
+						<span class="input-group-addon">Rp.</span>
+						<input ng-required="true" type="number" class="form-control" ng-model="FormData.gaji_chief">
+					</div>
+				</div>
+				<div class="col-md-6" style="padding: 0px 0px 0px 5px;">
+					<label>Overtime / Jam</label>
+					<div class="input-group">
+						<span class="input-group-addon">Rp.</span>
+						<input ng-required="true" type="number" class="form-control" ng-model="FormData.overtime_chief">
+					</div>
+				</div>
+			</div>
+			<div class="row" style="padding: 0px;">
+				<div class="col-md-6" style="padding: 0px 5px 0px 0px;">
+					<label>Salary Komandan Regu</label>
+					<div class="input-group">
+						<span class="input-group-addon">Rp.</span>
+						<input ng-required="true" type="number" class="form-control" ng-model="FormData.gaji_danru">
+					</div>
+				</div>
+				<div class="col-md-6" style="padding: 0px 0px 0px 5px;">
+					<label>Overtime / Jam</label>
+					<div class="input-group">
+						<span class="input-group-addon">Rp.</span>
+						<input ng-required="true" type="number" class="form-control" ng-model="FormData.overtime_danru">
+					</div>
+				</div>
+			</div>		
+			<div class="row" style="padding: 0px;">
+				<div class="col-md-6" style="padding: 0px 5px 0px 0px;">
+					<label>Salary Guard / Satpam</label>
+					<div class="input-group" style="margin-bottom: 15px;">
+						<span class="input-group-addon">Rp.</span>
+						<input ng-required="true" type="number" class="form-control" ng-model="FormData.gaji_satpam">
+					</div>
+				</div>
+				<div class="col-md-6" style="padding: 0px 0px 0px 5px;">
+					<label>Overtime / Jam</label>
+					<div class="input-group">
+						<span class="input-group-addon">Rp.</span>
+						<input ng-required="true" type="number" class="form-control" ng-model="FormData.overtime_satpam">
+					</div>
+				</div>
+			</div>		
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<rd-widget-form-group label="Cari di Peta">
+				<input ng-focus="searching()" ng-blur="end_searching()" ng-keyup="find_address()" id="us3-address" type="text" class="form-control" placeholder="Ketik alamat" ng-model="FormData.map_address" />
+			</rd-widget-form-group>
+			<rd-widget-form-group ng-hide="sedang_mencari" label="Latitude">
+				<input ng-readonly="true" id="us3-lat" type="text" class="form-control" placeholder="Latitude" ng-model="FormData.map_latitude"/>
+			</rd-widget-form-group>
+			<rd-widget-form-group ng-hide="sedang_mencari" label="Longitude">
+				<input ng-readonly="true" id="us3-lon" type="text" class="form-control" placeholder="Longitude" ng-model="FormData.map_longitude"/>
+			</rd-widget-form-group>
+			<div class="list-group" ng-show="sedang_mencari">
+				<a ng-click="pilih(place)" ng-repeat="place in places" href="javascript:void(0)" class="list-group-item"><i style="position: absolute;margin-top: -5px;color: #FF0000;" class="fa fa-2x fa-map-marker"></i> &nbsp; &nbsp; &nbsp; &nbsp;{{place.formatted_address}}</a>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<label>Peta Lokasi Alamat Klien</label>
+			<div id="map"></div>
+		</div>
+	</div>
+</rd-widget-body>
+<rd-widget-footer>
+<button class="btn btn-success" ng-bind="'Submit'"></button>
+</rd-widget-footer>
+</rd-widget>
+</form>
+</div>
+</div>
+</body>
+</html>

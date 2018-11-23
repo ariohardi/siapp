@@ -1,0 +1,72 @@
+<!-- saved from url=(0044)http://rdash.github.io/templates/tables.html -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div class="row">
+<div class="col-lg-12">
+<rd-widget>
+<rd-widget-header icon="fa-group" title="Daftar Regu">
+	<a target="_blank" href="/siapp/api/index.php/printing/data_regu?{{query_string}}" class="btn btn-default btn-sm"><i class="fa fa-print"></i>Cetak</a>
+	<a href="#/regu_baru"><button class="btn btn-sm btn-default ng-scope"><i class="fa fa-plus"></i>Tambah Regu</button></a>
+</rd-widget-header>
+<rd-widget-body classes="large no-padding" loading="{{loading}}">
+<div class="table-responsive">
+<table class="table">
+<thead>
+	<tr>
+		<th class="text-center">#</th>
+		<th>Nama Regu</th>
+		<th>Klien</th>
+		<th>Proyek</th>
+		<th>Komandan Regu</th>
+		<th>Total Satpam</th>
+		<th class="text-center">Opsi</th>
+	</tr>
+</thead>
+<tbody>
+	<tr ng-repeat="regu in array_regu">
+		<th class="text-center" ng-bind="$index+1"></th>
+		<td ng-bind="regu.nama_regu"></td>
+		<td ng-bind="regu.nama_klien"></td>
+		<td ng-bind="regu.nama_proyek"></td>
+		<td ng-bind="regu.nama_personil"></td> <!-- KOMANDAN REGU -->
+		<td ng-bind="regu.anggota+' Personil'"></td> <!-- KOMANDAN REGU -->
+		<td width="220" align="center">
+			<a class="btn btn-default btn-xs" href="#/edit_regu/{{regu.ID}}">
+				<i class="fa fa-pencil"></i> Edit
+			</a>
+			<a class="btn btn-default btn-xs" href="#/anggota_regu/{{regu.md5_id}}">
+				<i class="fa fa-group"></i> Satpam
+			</a>
+			<a class="btn btn-danger btn-xs" ng-click="$parent.hapus(regu)">
+				<i class="fa fa-trash-o"></i> Hapus
+			</a>
+		</td>
+	</tr>
+</tbody>
+</table>
+</div>
+</rd-widget-body>
+<rd-widget-footer>
+<!-- <div class="clearfix"></div> -->
+<div class="row">
+	<ul class="pagination pagination-sm pull-left">
+	          <li><a href="#">&laquo;</a></li>
+	          <li><a href="#">1</a></li>
+	          <li><a href="#">2</a></li>
+	          <li><a href="#">3</a></li>
+	          <li><a href="#">&raquo;</a></li>
+	</ul>
+	<div class="col-md-3" style="margin-bottom: -10px;margin-top: 0px;">
+			<input text="text" ng-keyup="cari()" placeholder="Ketik nama regu" class="form-control input-sm ng-scope" ng-model="filter.keyword" style="width:70%">
+	</div>
+	<p class="text-right">Total <span ng-bind="array_regu.length"></span> regu</p>
+</div>
+</rd-widget-footer>
+</rd-widget>
+</div>
+</div>
+</body>
+</html>

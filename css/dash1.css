@@ -1,0 +1,136 @@
+@import url(http://weloveiconfonts.com/api/?family=entypo);
+@import url('//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css');
+@import url('//cdn.jsdelivr.net/bootstrap/3.1.1/css/bootstrap.min.css');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,100,300,700,900');
+
+/* entypo */
+[class*="entypo-"]:before {
+  font-family: 'entypo', sans-serif;
+  font-style: initial;
+}
+
+body {
+  font-family: 'Roboto';
+  padding: 0;
+  margin: 0;
+  background: #fff;
+}
+
+.cards {
+  margin-left: 0px;
+  margin-right: 0px;
+  .card {
+    padding: 0px;
+    margin: 0px;
+  }
+}
+
+
+section.bubble {
+  background-color: #7ab986;
+  border-bottom: 2px solid #424956;
+  header {
+    text-transform: capitalize;
+    color: #fff;
+    font-weight: 100;
+    padding: 10px 10px 10px 10px;
+    font-size: 1.5em;
+    h4 {
+      color: #fff;
+      font-weight: 100;
+      font-size: 2em;
+      text-align: right;
+      margin: 0px;
+    }
+    ul {
+      list-style-type: none;
+      display: flex;
+      align-items: flex-start;
+      padding: 0PX;
+      margin: 0px;
+      justify-content: space-between;
+    }
+  }
+  article {
+    position: relative;
+    padding: 0px 10px 10px 10px;
+    .inlinebar {
+      opacity: 1;
+      canvas {
+        vertical-align: bottom !important;
+        zoom: 0.5;
+        max-width: 100%;
+      }
+    }
+    ul.sections {
+      display: flex;
+      list-style: none;
+      align-items: flex-end;
+      padding: 0px;
+      margin: 0px;
+      font-size: 1em;
+      li {
+        flex-grow: 1;
+      }
+      li.list {
+        color: #424956;
+        font-size: 1em;
+        ul {
+          list-style: none;
+          padding: 0px;
+          font-size: 1em;
+          li:first-child {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+  footer {
+    padding: 10px 10px 10px 10px;
+    background-color: #f4f5f6;
+    color: #424956;
+    text-transform: uppercase;
+    font-weight: normal;
+    ul.sections {
+      padding: 0;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      li {
+        list-style: none;
+        flex-grow: 1;
+        &:last-child {
+          text-align: right;
+        }
+        &.big-num {
+          color: #424956;
+          font-weight: 300;
+          font-size: 1.5em;
+          i{
+            &.up {
+              color: #70c030;
+            }
+            &.down {
+              color: #F16262;
+            }
+          }
+        }
+      }
+    }
+  }
+  &:after {
+    top: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(136, 183, 213, 0);
+    border-top-color: #424956;
+    border-width: 15px;
+    margin-left: -15px;
+  }
+}

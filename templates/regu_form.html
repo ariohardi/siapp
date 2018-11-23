@@ -1,0 +1,76 @@
+<!-- saved from url=(0044)http://rdash.github.io/templates/tables.html -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div class="row">
+<div class="col-md-12">
+<rd-widget>
+<form ng-submit="submit()">
+<rd-widget-header icon="fa-group" title="{{widget_title}}">
+<a href="#/regu">Batal</a>
+</rd-widget-header>
+<rd-widget-body classes="no-padding" loading="{{loading}}">
+	<br/>
+	<div class="row">
+		<div class="col-md-12">
+			<rd-widget-form-group label="Nama Regu">
+				<input class="form-control" ng-required="true" ng-model="FormData.nama_regu" />
+			</rd-widget-form-group>
+		</div>
+		<div class="col-md-6">
+			<rd-widget-form-group label="Klien">
+				<select ng-change="ganti_klien()" ng-required="true" class="form-control" ng-model="FormData.klien">
+					<option value="" ng-bind="'Pilih klien'"></option>
+					<option ng-repeat="klien in array_klien" value="{{klien.ID}}" ng-bind="klien.nama_klien"></option>
+				</select>
+			</rd-widget-form-group>
+		</div>
+		<div class="col-md-6">
+			<rd-widget-form-group label="Proyek">
+				<select ng-change="ganti_proyek()" ng-disabled="!FormData.klien" ng-required="FormData.klien" class="form-control" ng-model="FormData.proyek">
+					<option value="" ng-bind="'Pilih proyek'"></option>
+					<option ng-repeat="proyek in array_proyek" value="{{proyek.ID}}" ng-bind="proyek.nama_proyek+' ('+proyek.nama_klien+')'"></option>
+				</select>
+			</rd-widget-form-group>
+		</div>
+		<div class="col-md-6">
+			<rd-widget-form-group label="Lokasi Proyek">
+				<textarea rows="5" class="form-control" ng-disabled="true">{{ro.lokasi}}</textarea>
+			</rd-widget-form-group>
+		</div>
+		<div class="col-md-6">
+			<rd-widget-form-group label="Propinsi">
+				<input class="form-control" ng-disabled="true" value="{{ro.nama_propinsi}}" />
+			</rd-widget-form-group>
+			<rd-widget-form-group label="Kabupaten">
+				<input class="form-control" ng-disabled="true" value="{{ro.nama_kabupaten}}" />
+			</rd-widget-form-group>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<rd-widget-form-group label="Chief Security">
+				<input class="form-control" ng-disabled="true" value="{{ro.chief_security}}" />
+			</rd-widget-form-group>
+		</div>
+		<!-- <div class="col-md-6">
+			<rd-widget-form-group label="Komandan Regu">
+				<select ng-required="true" class="form-control" ng-model="FormData.komandan_regu">
+					<option value="" ng-bind="'Pilih komandan regu'"></option>
+					<option ng-repeat="komandan in array_komandan_regu" value="{{komandan.ID}}" ng-bind="komandan.nama_personil+' ( '+komandan.jenis_kelamin+'/'+myAge(komandan.tanggal_lahir)+' )'"></option>
+				</select>
+			</rd-widget-form-group>
+		</div> -->
+	</div>
+</rd-widget-body>
+<rd-widget-footer>
+<button class="btn btn-success" ng-bind="'Submit'"></button>
+</rd-widget-footer>
+</rd-widget>
+</form>
+</div>
+</div>
+</body>
+</html>

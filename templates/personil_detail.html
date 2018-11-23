@@ -1,0 +1,36 @@
+<!-- saved from url=(0044)http://rdash.github.io/templates/tables.html -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div class="row">
+<div ng-class="lokasi_personil.length == 3 ? 'col-md-5' : 'col-md-8 col-md-offset-2'">
+<rd-widget>
+<rd-widget-header icon="fa-user" title="Detail Personil">
+	<a href="#/personil" class="btn btn-sm btn-danger"><i class="fa fa-arrow-left"></i> Kembali</a>
+	<a href="/api/index.php/printing/cv/{{route[1]}}" target="_blank" class="btn btn-sm btn-default"><i class="fa fa-print"></i> Cetak CV</a>
+</rd-widget-header>
+<rd-widget-body classes="no-padding" loading="{{loading}}">
+<table class="table table-striped">
+<tbody>
+	<tr ng-repeat="(key, val) in personil">
+		<td width="120" ng-bind="val[0]"></td>
+		<th ng-bind="val[1]" class="text-right"></th>
+	</tr>
+</tbody>
+</table>
+</rd-widget-body>
+</rd-widget>
+</div>
+<div class="col-md-7" ng-show="lokasi_personil.length == 3">
+<rd-widget>
+<rd-widget-header icon="fa-map-marker" title="Posisi Terakhir {{data_mentah.nama_personil}}"></rd-widget-header>
+<rd-widget-body classes="no-padding">
+<div id="map" style="height: 474px;"></div>
+</rd-widget-body>
+</rd-widget>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!-- saved from url=(0044)http://rdash.github.io/templates/tables.html -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div class="row">
+<div class="col-lg-12">
+<rd-widget>
+<rd-widget-header icon="fa-user" title="Data Personil">
+<a target="_blank" href="/siapp_new/api/index.php/printing/data_personil?{{query_string}}&export=excel" class="btn btn-default btn-sm"><i class="fa fa-file-excel-o"></i>Ekspor Excel</a>
+<a target="_blank" href="/siapp_new/api/index.php/printing/data_personil?{{query_string}}" class="btn btn-default btn-sm"><i class="fa fa-print"></i>Cetak</a>
+<a href="#/personil_baru" class="btn btn-default btn-sm"><i class="fa fa-plus"></i>Personil Baru</a>
+</rd-widget-header>
+<rd-widget-body classes="large no-padding" loading="{{loading}}">
+<div class="table-responsive">
+<table class="table">
+<thead>
+	<tr>
+		<th class="text-center">#</th>
+		<th>Nama Personil</th>
+		<th>Posisi</th>
+		<th>Jenis Kelamin</th>
+		<th>TB / BB</th>
+		<th>Umur</th>
+		<th>No. Handphone</th>
+		<th class="text-center">Opsi</th>
+	</tr>
+</thead>
+<tbody>
+	<tr ng-repeat="personil in array_personil">
+		<th class="text-center" ng-bind="$index+1"></th>
+		<td>
+			<a class="link-in-table {{personil.md5_id}}" href="#/personil_detail/{{personil.md5_id}}" ng-bind="personil.nama_personil"></a>
+		</td>
+		<td>
+			<span ng-show="personil.level==='C'" ng-bind="'CHIEF SECURITY'"></span>
+			<span ng-show="personil.level==='D'" ng-bind="'KOMANDAN REGU'"></span>
+			<span ng-show="personil.level==='S'" ng-bind="'SATPAM'"></span>
+		</td>
+		<td ng-bind="personil.jenis_kelamin === 'L' ? 'Pria' : 'Wanita'"></td>
+		<td ng-bind="personil.tinggi_badan+'cm / '+personil.berat_badan+'kg'"></td>
+		<td ng-bind="myAge(personil.tanggal_lahir)+' tahun'"></td>
+		<td ng-bind="personil.nomor_handphone"></td>
+		<td width="240" align="center">
+			<a ng-click="$parent.video_call(personil)" class="btn btn-default btn-xs" href="javascript:void(0)">
+				<i class="fa fa-warning"></i> Instruksi
+			</a>
+			<a ng-click="$parent.edit(personil)" class="btn btn-default btn-xs" href="javascript:void(0)">
+				<i class="fa fa-pencil"></i> Edit
+			</a>
+			<a class="btn btn-danger btn-xs" ng-click="$parent.hapus(personil)">
+				<i class="fa fa-trash-o"></i> Hapus
+			</a>
+		</td>
+	</tr>
+</tbody>
+</table>
+</div>
+</rd-widget-body>
+<rd-widget-footer>
+<p class="text-right pull-right">Total <span ng-bind="array_personil.length"></span> personil</p>
+<span style="margin-top: 4px;" class="pull-left"><i class="fa fa-filter"></i> Filter</span>
+<div class="row">
+	<div class="col-md-2" style="margin-bottom: -10px;margin-top: 0px;">
+		<select class="form-control input-sm" ng-model="filter.level" ng-change="get_data()">
+			<option value="">SEMUA PERSONIL</option>
+			<option value="C">CHIEF SECURITY</option>
+			<option value="D">KOMANDAN REGU</option>
+			<option value="S">SATPAM</option>
+		</select>
+	</div>
+	<div class="col-md-2" style="margin-bottom: -10px;margin-top: 0px;">
+		<select class="form-control input-sm" ng-model="filter.jenis_kelamin" ng-change="get_data()">
+			<option value="">SEMUA GENDER</option>
+			<option value="L">LAKI-LAKI</option>
+			<option value="P">PEREMPUAN</option>
+		</select>
+	</div>
+	<div class="col-md-2" style="margin-bottom: -10px;margin-top: 0px;">
+		<select class="form-control input-sm" ng-model="filter.tinggi_badan" ng-change="get_data()">
+			<option value="">TINGGI BADAN</option>
+			<option ng-repeat="tinggi in tinggi_badan.sort()" value="{{tinggi}}">{{tinggi}} CM</option>
+		</select>
+	</div>
+	<div class="col-md-3" style="margin-bottom: -10px;margin-top: 0px;">
+		<input ng-keyup="cari()" placeholder="Ketik nama personil" class="form-control input-sm" type="text" ng-model="filter.keyword">
+	</div>
+</div>
+<!-- {{query_string}} -->
+<!-- {{tinggi_badan.sort()}} -->
+<!-- <div class="clearfix"></div> -->
+</rd-widget-footer>
+</rd-widget>
+</div>
+</div>
+</body>
+</html>

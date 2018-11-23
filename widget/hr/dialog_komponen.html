@@ -1,0 +1,35 @@
+<div style="display: none;" id="dlg-komponen">
+    <form id="ff-komponen" method="post" style="padding: 15px;">
+        <table width="100%" class="tbform">
+        	<tr>
+        		<td valign="top" width="150px">
+        			<label for="nama_komponen">Nama Komponen</label>
+        		</td>
+        		<td>
+        			<input class="textbox textbox-text" id="id_komponen" type="hidden" name="id_komponen">
+        			<input class="textbox textbox-text" id="nama_komponen" type="text" name="nama_komponen">
+        		</td>
+        	</tr>
+        	<tr>
+        		<td valign="top">
+        			<label for="tipe_komponen">Tipe Komponen</label>
+        		</td>
+        		<td>
+        			<select id="tipe_komponen" name="tipe_komponen" style="width:100%;">
+					    <option value="GP">Gaji Pokok</option>
+					    <option value="TJ">Tunjangan</option>
+					    <option value="PT">Potongan</option>
+					</select>
+        		</td>
+        	</tr>
+        	<tr>
+        		<td valign="top">
+        			<label for="detail_komponen">Keterangan</label>
+        		</td>
+        		<td>
+        			<textarea class="textbox textbox-text" rows="5" id="detail_komponen" type="text" name="detail_komponen"></textarea>
+        		</td>
+        	</tr>
+        </table>
+    </form>    
+</div>

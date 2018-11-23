@@ -1,0 +1,9 @@
+nav ul li:hover .sub1 {display:block}
+nav ul .sub1 {
+    display:none;
+    position:absolute;
+    left:150px;
+    top:50px;
+    background-color:#d35400;
+}
+.sub1 a:hover { color:#fff}

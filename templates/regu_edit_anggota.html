@@ -1,0 +1,119 @@
+<!-- saved from url=(0044)http://rdash.github.io/templates/tables.html -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div class="row">
+<div class="col-xs-6">
+<rd-widget>
+<rd-widget-header icon="fa-user" title="Data Personil">
+<!-- <a href="#/personil_baru">+ Personil Baru</a> -->
+</rd-widget-header>
+<rd-widget-body classes="large no-padding" loading="{{loading}}">
+<div class="table-responsive">
+<table class="table">
+<thead>
+	<tr>
+		<th class="text-center">#</th>
+		<th>Nama Personil</th>
+		<th>Posisi</th>
+		<th>Jenis Kelamin</th>
+		<th>Umur</th>
+		<th class="text-center">Pilih</th>
+	</tr>
+</thead>
+<tbody>
+	<tr ng-repeat="personil in array_personil">
+		<th class="text-center" ng-bind="$index+1"></th>
+		<td ng-bind="personil.nama_personil"></td>
+		<td>
+			<span ng-show="personil.level==='C'" ng-bind="'CHIEF SECURITY'"></span>
+			<span ng-show="personil.level==='D'" ng-bind="'KOMANDAN REGU'"></span>
+			<span ng-show="personil.level==='S'" ng-bind="'SATPAM'"></span>
+		</td>
+		<td ng-bind="personil.jenis_kelamin === 'L' ? 'Laki-Laki' : 'Perempuan'"></td>
+		<td ng-bind="myAge(personil.tanggal_lahir)+' tahun'"></td>
+		<td width="70" align="center">
+			<a ng-click="$parent.pilih(personil)" class="btn btn-success btn-xs" href="javascript:void(0)">
+				Pilih <i class="fa fa-arrow-right"></i>
+			</a>
+		</td>
+	</tr>
+</tbody>
+</table>
+</div>
+</rd-widget-body>
+<rd-widget-footer>
+<p class="text-right pull-right">Total <span ng-bind="array_personil.length"></span> personil</p>
+<span style="margin-top: 4px;" class="pull-left">Filter</span>
+<div class="row">
+	<div class="col-md-4" style="margin-bottom: -10px;margin-top: 0px;">
+		<select class="form-control input-sm" ng-model="filter.jenis_kelamin" ng-change="get_data()">
+			<option value="">SEMUA GENDER</option>
+			<option value="L">LAKI-LAKI</option>
+			<option value="P">PEREMPUAN</option>
+		</select>
+	</div>
+	<div class="col-md-4" style="margin-bottom: -10px;margin-top: 0px;">
+		<input ng-keyup="cari()" placeholder="Ketik nama personil" class="form-control input-sm" type="text" ng-model="filter.keyword">
+	</div>
+</div>
+<!-- <div class="clearfix"></div> -->
+</rd-widget-footer>
+</rd-widget>
+</div>
+
+<div class="col-xs-6">
+<rd-widget>
+<rd-widget-header icon="fa-group" title="Anggota {{regu.nama_regu}}">
+<!-- <a href="#/personil_baru">+ Personil Baru</a> -->
+</rd-widget-header>
+<rd-widget-body classes="large no-padding" loading="{{loading2}}">
+<div class="table-responsive">
+<table class="table">
+<thead>
+	<tr>
+		<th class="text-center">Keluar</th>
+		<th class="text-center">#</th>
+		<th>Nama Personil</th>
+		<th>Posisi</th>
+		<th>Jenis Kelamin</th>
+		<th>Umur</th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+		<td ng-hide="anggota_terpilih_data.length>0" align="center" colspan="6">
+			Belum ada anggota satpam dalam regu
+		</td>
+	</tr>
+	<tr ng-repeat="personil in anggota_terpilih_data">
+		<td width="70" align="center">
+			<a ng-click="$parent.hapus(personil)" class="btn btn-danger btn-xs" href="javascript:void(0)">
+				<i class="fa fa-arrow-left"></i> Keluar
+			</a>
+		</td>
+		<th class="text-center" ng-bind="$index+1"></th>
+		<td ng-bind="personil.nama_personil"></td>
+		<td>
+			<span ng-show="personil.level==='C'" ng-bind="'CHIEF SECURITY'"></span>
+			<span ng-show="personil.level==='D'" ng-bind="'KOMANDAN REGU'"></span>
+			<span ng-show="personil.level==='S'" ng-bind="'SATPAM'"></span>
+		</td>
+		<td ng-bind="personil.jenis_kelamin === 'L' ? 'Laki-Laki' : 'Perempuan'"></td>
+		<td ng-bind="myAge(personil.tanggal_lahir)+' tahun'"></td>
+	</tr>
+</tbody>
+</table>
+</div>
+</rd-widget-body>
+<rd-widget-footer>
+<p class="text-right" ng-show="anggota_terpilih_data.length==0">Belum ada anggota</p>
+<p class="text-right" ng-hide="anggota_terpilih_data.length==0">Total <span ng-bind="anggota_terpilih_data.length"></span> anggota</p>
+</rd-widget-footer>
+</rd-widget>
+</div>
+</div>
+</body>
+</html>

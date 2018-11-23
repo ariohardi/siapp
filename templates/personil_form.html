@@ -1,0 +1,601 @@
+<!-- saved from url=(0044)http://rdash.github.io/templates/tables.html -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<body>
+<div class="row">
+<div class="col-md-12">
+<rd-widget>
+<form ng-submit="submit()">
+<rd-widget-header icon="fa-user" title="{{widget_title}}">
+<a href="#/personil">Batal</a>
+</rd-widget-header>
+<rd-widget-body classes="no-padding" loading="{{loading}}">
+	<br/>
+	<div class="row">
+	<div class="col-md-4 col-lg-3">
+		<center>
+			<label>Foto Personil</label>
+			<img id="fotopersonil" width="100%" src="{{myfile ? 'data:image/jpeg;base64,'+myfile.base64 : foto_default}}" />
+			<label for="uploadfoto">
+				<input style="opacity: 0;" id="uploadfoto" type="file" ng-model="myfile" base-sixty-four-input />
+				<a onclick="jQuery('#uploadfoto').trigger('click')" href="javascript:void(0)" class="btn btn-sm btn-default" style="margin-top: -10px;">
+					Upload Foto
+				</a>
+			</label>
+		</center>
+	</div>
+	<div class="col-md-8 col-lg-9">
+	<div class="row">
+		<div class="col-md-6" style="margin-bottom: 0px;">
+			<rd-widget-form-group label="Nama Lengkap">
+				<input ng-required="true" type="text" class="form-control" ng-model="FormData.nama_personil">
+			</rd-widget-form-group>
+		</div>
+		<div class="col-md-6" style="margin-bottom: 0px;">
+			<rd-widget-form-group label="Jenis Kelamin">
+				<label style="font-weight: normal;padding: 5px;"><input ng-required="!FormData.jenis_kelamin" ng-click="FormData.jenis_kelamin = 'L'" ng-checked="FormData.jenis_kelamin === 'L'" type="radio" name="" /> Laki Laki</label> &nbsp; &nbsp;
+				<label style="font-weight: normal;padding: 5px;"><input ng-required="!FormData.jenis_kelamin" ng-click="FormData.jenis_kelamin = 'P'" ng-checked="FormData.jenis_kelamin === 'P'" type="radio" name="" /> Perempuan</label>
+			</rd-widget-form-group>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6" style="margin-bottom: 0px;">
+			<rd-widget-form-group label="Berat Badan">
+				<div class="input-group">
+				  	<input type="number" ng-model="FormData.berat_badan" class="form-control text-right" aria-describedby="basic-addon2">
+				  	<span class="input-group-addon" id="basic-addon2">Kg</span>
+				</div>
+			</rd-widget-form-group>
+		</div>
+		<div class="col-md-6" style="margin-bottom: 0px;">
+			<rd-widget-form-group label="Tinggi Badan">
+				<div class="input-group">
+				  	<input type="number" ng-model="FormData.tinggi_badan" class="form-control text-right" aria-describedby="basic-addon2">
+				  	<span class="input-group-addon" id="basic-addon2">Cm</span>
+				</div>
+			</rd-widget-form-group>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6" style="margin-bottom: 0px;">
+			<rd-widget-form-group label="Nomor Handphone">
+				<input ng-required="true" type="text" class="form-control" ng-model="FormData.nomor_handphone">
+			</rd-widget-form-group>
+		</div>
+		<div class="col-md-6" style="margin-bottom: 0px;">
+			<rd-widget-form-group label="Alamat Email">
+				<input ng-required="false" type="email" class="form-control" ng-model="FormData.email">
+			</rd-widget-form-group>
+		</div>
+	</div>
+	<div class="row" ng-show="route[0]==='personil_baru'">
+		<div class="col-md-6" style="margin-bottom: 0px;">
+			<rd-widget-form-group label="Kata Sandi">
+				<input ng-required="route[0]==='personil_baru'" type="password" class="form-control" ng-model="FormData.password">
+			</rd-widget-form-group>
+		</div>
+		<div class="col-md-6" style="margin-bottom: 0px;">
+			<rd-widget-form-group label="Ulangi Kata Sandi">
+				<input ng-required="route[0]==='personil_baru'" type="password" class="form-control" ng-model="FormData.password2">
+			</rd-widget-form-group>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<rd-widget-form-group label="Tempat Lahir">
+				<input type="text" class="form-control" ng-model="FormData.tempat_lahir">
+			</rd-widget-form-group>
+		</div>
+		<div class="col-md-6">
+			<rd-widget-form-group label="Tanggal Lahir">
+				<div id="cuppaDatePicker">
+                	<cuppa-datepicker on-date-select="tanggal_lahir(selectedDate)" ng-model="FormData.tanggal_lahir" big-banner="true" format="DD/MM/YYYY"></cuppa-datepicker>
+        		</div>
+			</rd-widget-form-group>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<rd-widget-form-group label="Propinsi">
+				<select ng-change="ganti_propinsi()" ng-required="true" class="form-control" ng-model="FormData.propinsi">
+					<option value="" ng-bind="'Pilih propinsi'"></option>
+					<option ng-repeat="propinsi in array_propinsi" value="{{propinsi.ID}}" ng-bind="propinsi.nama_propinsi"></option>
+				</select>
+			</rd-widget-form-group>
+			<rd-widget-form-group label="Kota / Kabupaten">
+				<select ng-required="FormData.propinsi" ng-disabled="!FormData.propinsi" class="form-control" ng-model="FormData.kabupaten">
+					<option value="" ng-bind="'Pilih kabupaten'"></option>
+					<option ng-repeat="kabupaten in array_kabupaten" value="{{kabupaten.ID}}" ng-bind="kabupaten.nama_kabupaten"></option>
+				</select>
+			</rd-widget-form-group>
+		</div>
+		<div class="col-md-6">
+			<rd-widget-form-group label="Alamat Lengkap">
+				<textarea rows="5" ng-required="true" class="form-control" ng-model="FormData.alamat"></textarea>
+			</rd-widget-form-group>
+		</div>
+	</div>
+	<div class="row" style="padding: 0px;">
+		<div class="col-md-6">
+			<label>Salary / Bulan</label>
+			<div class="input-group" style="margin-bottom: 15px;">
+				<span class="input-group-addon">Rp.</span>
+				<input ng-required="true" type="number" class="form-control" ng-model="FormData.gaji">
+			</div>
+		</div>
+		<div class="col-md-6">
+			<label>Overtime / Jam</label>
+			<div class="input-group">
+				<span class="input-group-addon">Rp.</span>
+				<input ng-required="true" type="number" class="form-control" ng-model="FormData.overtime">
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<rd-widget-form-group label="Kualifikasi">
+				<select class="form-control" ng-required="true" ng-model="FormData.kualifikasi">
+					<option value="">Tentukan Kualifikasi</option>
+					<option value="NONE">Belum ada kualifikasi</option>
+					<option value="GADA PRATAMA">GADA PRATAMA</option>
+					<option value="GADA MADYA">GADA MADYA</option>
+					<option value="GADA UTAMA">GADA UTAMA</option>
+				</select>
+			</rd-widget-form-group>	
+		</div>
+		<div class="col-md-6">
+			<rd-widget-form-group label="Tingkat">
+				<label style="font-weight: normal;padding: 5px;"><input ng-required="!FormData.level" ng-click="FormData.level = 'C'" ng-checked="FormData.level === 'C'" type="radio" name="" /> Chief Security</label> &nbsp;
+				<label style="font-weight: normal;padding: 5px;"><input ng-required="!FormData.level" ng-click="FormData.level = 'D'" ng-checked="FormData.level === 'D'" type="radio" name="" /> Komandan regu</label> &nbsp;
+				<label style="font-weight: normal;padding: 5px;"><input ng-required="!FormData.level" ng-click="FormData.level = 'S'" ng-checked="FormData.level === 'S'" type="radio" name="" /> Satpam</label>
+			</rd-widget-form-group>
+		</div>
+	</div>
+	</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<h4>Pendidikan Formal</h4>
+			<p>Urutkan dari mulai yang terendah hinga jenjang pendidikan yang tertinggi</p>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th style="width: 30px;text-align: center;">#</th>
+						<th>Nama Sekloah / Perguruan Tinggi</th>
+						<th style="width: 120px;text-align: center;">Tahun Masuk</th>
+						<th style="width: 120px;text-align: center;">Tahun Lulus</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td valign="middle" align="center">1</td>
+						<td>
+							<input type="text" class="form-control" ng-model="FormData.pendidikan[0].nama_sekolah" />
+						</td>
+						<td>
+							<input type="text" class="form-control" 
+							ng-model="FormData.pendidikan[0].tahun_masuk"
+							ng-required="FormData.pendidikan[0].nama_sekolah.length>0"
+							ng-disabled="!FormData.pendidikan[0].nama_sekolah||FormData.pendidikan[0].nama_sekolah.length==0" />
+						</td>
+						<td>
+							<input type="text" class="form-control" 
+							ng-model="FormData.pendidikan[0].tahun_keluar"
+							ng-required="FormData.pendidikan[0].nama_sekolah.length>0"
+							ng-disabled="!FormData.pendidikan[0].nama_sekolah||FormData.pendidikan[0].nama_sekolah.length==0" />
+						</td>
+					</tr>
+					<tr>
+						<td valign="middle" align="center">2</td>
+						<td>
+							<input type="text" class="form-control" 
+							ng-model="FormData.pendidikan[1].nama_sekolah"
+							ng-disabled="!FormData.pendidikan[0].nama_sekolah||FormData.pendidikan[0].nama_sekolah.length==0" />
+						</td>
+						<td>
+							<input type="text" class="form-control" 
+							ng-model="FormData.pendidikan[1].tahun_masuk"
+							ng-required="FormData.pendidikan[1].nama_sekolah.length>0"
+							ng-disabled="!FormData.pendidikan[1].nama_sekolah||FormData.pendidikan[1].nama_sekolah.length==0" />
+						</td>
+						<td>
+							<input type="text" class="form-control" 
+							ng-model="FormData.pendidikan[1].tahun_keluar"
+							ng-required="FormData.pendidikan[1].nama_sekolah.length>0"
+							ng-disabled="!FormData.pendidikan[1].nama_sekolah||FormData.pendidikan[1].nama_sekolah.length==0" />
+						</td>
+					</tr>
+					<tr>
+						<td valign="middle" align="center">3</td>
+						<td>
+							<input type="text" class="form-control" 
+							ng-model="FormData.pendidikan[2].nama_sekolah"
+							ng-disabled="!FormData.pendidikan[1].nama_sekolah||FormData.pendidikan[1].nama_sekolah.length==0" />
+						</td>
+						<td>
+							<input type="text" class="form-control" 
+							ng-model="FormData.pendidikan[2].tahun_masuk"
+							ng-required="FormData.pendidikan[2].nama_sekolah.length>0"
+							ng-disabled="!FormData.pendidikan[2].nama_sekolah||FormData.pendidikan[2].nama_sekolah.length==0" />
+						</td>
+						<td>
+							<input type="text" class="form-control" 
+							ng-model="FormData.pendidikan[2].tahun_keluar"
+							ng-required="FormData.pendidikan[2].nama_sekolah.length>0"
+							ng-disabled="!FormData.pendidikan[2].nama_sekolah||FormData.pendidikan[2].nama_sekolah.length==0" />
+						</td>
+					</tr>
+					<tr>
+						<td valign="middle" align="center">4</td>
+						<td>
+							<input type="text" class="form-control" 
+							ng-model="FormData.pendidikan[3].nama_sekolah"
+							ng-disabled="!FormData.pendidikan[2].nama_sekolah||FormData.pendidikan[2].nama_sekolah.length==0" />
+						</td>
+						<td>
+							<input type="text" class="form-control" 
+							ng-model="FormData.pendidikan[3].tahun_masuk"
+							ng-required="FormData.pendidikan[3].nama_sekolah.length>0"
+							ng-disabled="!FormData.pendidikan[3].nama_sekolah||FormData.pendidikan[3].nama_sekolah.length==0" />
+						</td>
+						<td>
+							<input type="text" class="form-control" 
+							ng-model="FormData.pendidikan[3].tahun_keluar"
+							ng-required="FormData.pendidikan[3].nama_sekolah.length>0"
+							ng-disabled="!FormData.pendidikan[3].nama_sekolah||FormData.pendidikan[3].nama_sekolah.length==0" />
+						</td>
+					</tr>
+					<tr>
+						<td valign="middle" align="center">5</td>
+						<td>
+							<input type="text" class="form-control" 
+							ng-model="FormData.pendidikan[4].nama_sekolah"
+							ng-disabled="!FormData.pendidikan[3].nama_sekolah||FormData.pendidikan[3].nama_sekolah.length==0" />
+						</td>
+						<td>
+							<input type="text" class="form-control" 
+							ng-model="FormData.pendidikan[4].tahun_masuk"
+							ng-required="FormData.pendidikan[4].nama_sekolah.length>0"
+							ng-disabled="!FormData.pendidikan[4].nama_sekolah||FormData.pendidikan[4].nama_sekolah.length==0" />
+						</td>
+						<td>
+							<input type="text" class="form-control" 
+							ng-model="FormData.pendidikan[4].tahun_keluar"
+							ng-required="FormData.pendidikan[4].nama_sekolah.length>0"
+							ng-disabled="!FormData.pendidikan[4].nama_sekolah||FormData.pendidikan[4].nama_sekolah.length==0" />
+						</td>
+					</tr>
+				</tbody>
+			</table>	
+		</div>
+	</div>		
+	<div class="row">
+		<div class="col-md-12">
+			<h4>Pendidikan Satpam</h4>
+			<p>Berikan tanda checklist pada tingkat pelatihan yang pernah diikuti atau lewati bagian ini bila {{FormData.nama_personil}} belum pernah mengikuti pelatihan</p>
+			<!-- <p>{{FormData.pelatihan}}</p> -->
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th style="width: 30px;text-align: center;">#</th>
+						<th>Tingkat</th>
+						<th>Instansi / Perusahaan Penyelenggara</th>
+						<th style="width: 210px;">Kota Pelatihan</th>
+						<th style="width: 120px;text-align: center;">Tahun</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><input id="cb0" type="checkbox" ng-model="FormData.pelatihan[0].tingkat" ng-checked="FormData.pelatihan[0].tingkat" value="GADA PRATAMA"></td>
+						<td>
+							<label for="cb0" style="cursor: pointer;">GADA PRATAMA</label>
+						</td>
+						<td>
+							<input type="text" class="form-control" ng-model="FormData.pelatihan[0].instansi"
+							ng-required="FormData.pelatihan[0].tingkat" ng-disabled="!FormData.pelatihan[0].tingkat||FormData.pelatihan[0].tingkat.length==0" />
+						</td>
+						<td>
+							<input type="text" class="form-control" ng-model="FormData.pelatihan[0].kota"
+							ng-required="FormData.pelatihan[0].tingkat" ng-disabled="!FormData.pelatihan[0].tingkat||FormData.pelatihan[0].tingkat.length==0" />
+						</td>
+						<td>
+							<input type="text" class="form-control" ng-model="FormData.pelatihan[0].tahun"
+							ng-required="FormData.pelatihan[0].tingkat" ng-disabled="!FormData.pelatihan[0].tingkat||FormData.pelatihan[0].tingkat.length==0" />
+						</td>
+					</tr>
+					<tr>
+						<td><input id="cb1" type="checkbox" ng-model="FormData.pelatihan[1].tingkat" ng-checked="FormData.pelatihan[1].tingkat" value="GADA MADYA"></td>
+						<td>
+							<label for="cb1" style="cursor: pointer;">GADA MADYA</label>
+						</td>
+						<td>
+							<input type="text" class="form-control" ng-model="FormData.pelatihan[1].instansi"
+							ng-required="FormData.pelatihan[1].tingkat" ng-disabled="!FormData.pelatihan[1].tingkat||FormData.pelatihan[1].tingkat.length==0" />
+						</td>
+						<td>
+							<input type="text" class="form-control" ng-model="FormData.pelatihan[1].kota"
+							ng-required="FormData.pelatihan[1].tingkat" ng-disabled="!FormData.pelatihan[1].tingkat||FormData.pelatihan[1].tingkat.length==0" />
+						</td>
+						<td>
+							<input type="text" class="form-control" ng-model="FormData.pelatihan[1].tahun"
+							ng-required="FormData.pelatihan[1].tingkat" ng-disabled="!FormData.pelatihan[1].tingkat||FormData.pelatihan[1].tingkat.length==0" />
+						</td>
+					</tr>
+					<tr>
+						<td><input id="cb2" type="checkbox" ng-model="FormData.pelatihan[2].tingkat" ng-checked="FormData.pelatihan[2].tingkat" value="GADA UTAMA"></td>
+						<td>
+							<label for="cb2" style="cursor: pointer;">GADA UTAMA</label>
+						</td>
+						<td>
+							<input type="text" class="form-control" ng-model="FormData.pelatihan[2].instansi"
+							ng-required="FormData.pelatihan[2].tingkat" ng-disabled="!FormData.pelatihan[2].tingkat||FormData.pelatihan[2].tingkat.length==0" />
+						</td>
+						<td>
+							<input type="text" class="form-control" ng-model="FormData.pelatihan[2].kota"
+							ng-required="FormData.pelatihan[2].tingkat" ng-disabled="!FormData.pelatihan[2].tingkat||FormData.pelatihan[2].tingkat.length==0" />
+						</td>
+						<td>
+							<input type="text" class="form-control" ng-model="FormData.pelatihan[2].tahun"
+							ng-required="FormData.pelatihan[2].tingkat" ng-disabled="!FormData.pelatihan[2].tingkat||FormData.pelatihan[2].tingkat.length==0" />
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>			
+	<div class="row">
+		<div class="col-md-12">
+			<h4>Pengalaman Kerja Terakhir</h4>
+			<p>Urutkan dari mulai yang terakhir atau kosongkan jika belum ada pengalaman kerja</p>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th style="width: 30px;text-align: center;">#</th>
+						<th>Perusahaan</th>
+						<th>Tugas / Tanggung Jawab</th>
+						<th style="width: 120px;text-align: center;">Masuk</th>
+						<th style="width: 120px;text-align: center;">Keluar</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="center">1</td>
+						<td width="280" align="center">
+							<input placeholder="Nama Perusahaan" ng-keyup="ketik_jabatan(0)" type="text" class="form-control" ng-model="FormData.pengalaman_kerja[0].nama_perusahaan" />
+							<input placeholder="Jabatan" ng-keyup="ketik_jabatan(0)" type="text" class="form-control" ng-model="FormData.pengalaman_kerja[0].jabatan" ng-disabled="!FormData.pengalaman_kerja[0].nama_perusahaan||FormData.pengalaman_kerja[0].nama_perusahaan.length==0" ng-required="FormData.pengalaman_kerja[0].nama_perusahaan.length>0" style="margin-top: 5px;" />
+						</td>
+						<td>
+							<textarea ng-required="FormData.pengalaman_kerja[0].nama_perusahaan.length > 0" ng-disabled="!FormData.pengalaman_kerja[0].nama_perusahaan||FormData.pengalaman_kerja[0].nama_perusahaan.length==0" rows="6" class="form-control" ng-model="FormData.pengalaman_kerja[0].deskripsi"></textarea>
+						</td>
+						<td align="center">
+							<select style="margin-bottom: 5px;" class="form-control" ng-model="FormData.pengalaman_kerja[0].bulan_masuk" ng-required="FormData.pengalaman_kerja[0].nama_perusahaan.length > 0" ng-disabled="!FormData.pengalaman_kerja[0].nama_perusahaan||FormData.pengalaman_kerja[0].nama_perusahaan.length==0">
+								<option value="">Pilih bulan</option>
+								<option ng-repeat="bulan in months" value="{{bulan}}" ng-bind="bulan"></option>
+							</select>
+							<input placeholder="Tahun" ng-required="FormData.pengalaman_kerja[0].nama_perusahaan.length > 0" ng-disabled="!FormData.pengalaman_kerja[0].nama_perusahaan||FormData.pengalaman_kerja[0].nama_perusahaan.length==0" type="text" class="form-control" ng-model="FormData.pengalaman_kerja[0].tahun_masuk" />
+						</td>
+						<td align="center">
+							<select style="margin-bottom: 5px;" class="form-control" ng-model="FormData.pengalaman_kerja[0].bulan_keluar" ng-required="FormData.pengalaman_kerja[0].nama_perusahaan.length > 0" ng-disabled="!FormData.pengalaman_kerja[0].nama_perusahaan||FormData.pengalaman_kerja[0].nama_perusahaan.length==0">
+								<option value="">Pilih bulan</option>
+								<option ng-repeat="bulan in months" value="{{bulan}}" ng-bind="bulan"></option>
+							</select>
+							<input placeholder="Tahun" ng-required="FormData.pengalaman_kerja[0].nama_perusahaan.length > 0" ng-disabled="!FormData.pengalaman_kerja[0].nama_perusahaan||FormData.pengalaman_kerja[0].nama_perusahaan.length==0" type="text" class="form-control" ng-model="FormData.pengalaman_kerja[0].tahun_keluar" />
+						</td>
+					</tr>
+					<tr>
+						<td align="center">2</td>
+						<td width="280" align="center">
+							<input ng-disabled="!FormData.pengalaman_kerja[0].nama_perusahaan||FormData.pengalaman_kerja[0].nama_perusahaan.length==0" placeholder="Nama Perusahaan" ng-keyup="ketik_jabatan(1)" type="text" class="form-control" ng-model="FormData.pengalaman_kerja[1].nama_perusahaan" />
+							<input placeholder="Jabatan" ng-keyup="ketik_jabatan(1)" type="text" class="form-control" ng-model="FormData.pengalaman_kerja[1].jabatan" ng-disabled="!FormData.pengalaman_kerja[1].nama_perusahaan||FormData.pengalaman_kerja[1].nama_perusahaan.length==0" ng-required="FormData.pengalaman_kerja[1].nama_perusahaan.length>0" style="margin-top: 5px;" />
+						</td>
+						<td>
+							<textarea ng-required="FormData.pengalaman_kerja[1].nama_perusahaan.length > 0" ng-disabled="!FormData.pengalaman_kerja[1].nama_perusahaan||FormData.pengalaman_kerja[1].nama_perusahaan.length==0" rows="6" class="form-control" ng-model="FormData.pengalaman_kerja[1].deskripsi"></textarea>
+						</td>
+						<td align="center">
+							<select style="margin-bottom: 5px;" class="form-control" ng-model="FormData.pengalaman_kerja[1].bulan_masuk" ng-required="FormData.pengalaman_kerja[1].nama_perusahaan.length > 0" ng-disabled="!FormData.pengalaman_kerja[1].nama_perusahaan||FormData.pengalaman_kerja[1].nama_perusahaan.length==0">
+								<option value="">Pilih bulan</option>
+								<option ng-repeat="bulan in months" value="{{bulan}}" ng-bind="bulan"></option>
+							</select>
+							<input placeholder="Tahun" ng-required="FormData.pengalaman_kerja[1].nama_perusahaan.length > 0" ng-disabled="!FormData.pengalaman_kerja[1].nama_perusahaan||FormData.pengalaman_kerja[1].nama_perusahaan.length==0" type="text" class="form-control" ng-model="FormData.pengalaman_kerja[1].tahun_masuk" />
+						</td>
+						<td align="center">
+							<select style="margin-bottom: 5px;" class="form-control" ng-model="FormData.pengalaman_kerja[1].bulan_keluar" ng-required="FormData.pengalaman_kerja[1].nama_perusahaan.length > 0" ng-disabled="!FormData.pengalaman_kerja[1].nama_perusahaan||FormData.pengalaman_kerja[1].nama_perusahaan.length==0">
+								<option value="">Pilih bulan</option>
+								<option ng-repeat="bulan in months" value="{{bulan}}" ng-bind="bulan"></option>
+							</select>
+							<input placeholder="Tahun" ng-required="FormData.pengalaman_kerja[1].nama_perusahaan.length > 0" ng-disabled="!FormData.pengalaman_kerja[1].nama_perusahaan||FormData.pengalaman_kerja[1].nama_perusahaan.length==0" type="text" class="form-control" ng-model="FormData.pengalaman_kerja[1].tahun_keluar" />
+						</td>
+					</tr>
+					<tr>
+						<td align="center">3</td>
+						<td width="280" align="center">
+							<input ng-disabled="!FormData.pengalaman_kerja[1].nama_perusahaan||FormData.pengalaman_kerja[1].nama_perusahaan.length==0" placeholder="Nama Perusahaan" ng-keyup="ketik_jabatan(2)" type="text" class="form-control" ng-model="FormData.pengalaman_kerja[2].nama_perusahaan" />
+							<input placeholder="Jabatan" ng-keyup="ketik_jabatan(2)" type="text" class="form-control" ng-model="FormData.pengalaman_kerja[2].jabatan" ng-disabled="!FormData.pengalaman_kerja[2].nama_perusahaan||FormData.pengalaman_kerja[2].nama_perusahaan.length==0" ng-required="FormData.pengalaman_kerja[2].nama_perusahaan.length>0" style="margin-top: 5px;" />
+						</td>
+						<td>
+							<textarea ng-required="FormData.pengalaman_kerja[2].nama_perusahaan.length > 0" ng-disabled="!FormData.pengalaman_kerja[2].nama_perusahaan||FormData.pengalaman_kerja[2].nama_perusahaan.length==0" rows="6" class="form-control" ng-model="FormData.pengalaman_kerja[2].deskripsi"></textarea>
+						</td>
+						<td align="center">
+							<select style="margin-bottom: 5px;" class="form-control" ng-model="FormData.pengalaman_kerja[2].bulan_masuk" ng-required="FormData.pengalaman_kerja[2].nama_perusahaan.length > 0" ng-disabled="!FormData.pengalaman_kerja[2].nama_perusahaan||FormData.pengalaman_kerja[2].nama_perusahaan.length==0">
+								<option value="">Pilih bulan</option>
+								<option ng-repeat="bulan in months" value="{{bulan}}" ng-bind="bulan"></option>
+							</select>
+							<input placeholder="Tahun" ng-required="FormData.pengalaman_kerja[2].nama_perusahaan.length > 0" ng-disabled="!FormData.pengalaman_kerja[2].nama_perusahaan||FormData.pengalaman_kerja[2].nama_perusahaan.length==0" type="text" class="form-control" ng-model="FormData.pengalaman_kerja[2].tahun_masuk" />
+						</td>
+						<td align="center">
+							<select style="margin-bottom: 5px;" class="form-control" ng-model="FormData.pengalaman_kerja[2].bulan_keluar" ng-required="FormData.pengalaman_kerja[2].nama_perusahaan.length > 0" ng-disabled="!FormData.pengalaman_kerja[2].nama_perusahaan||FormData.pengalaman_kerja[2].nama_perusahaan.length==0">
+								<option value="">Pilih bulan</option>
+								<option ng-repeat="bulan in months" value="{{bulan}}" ng-bind="bulan"></option>
+							</select>
+							<input placeholder="Tahun" ng-required="FormData.pengalaman_kerja[2].nama_perusahaan.length > 0" ng-disabled="!FormData.pengalaman_kerja[2].nama_perusahaan||FormData.pengalaman_kerja[2].nama_perusahaan.length==0" type="text" class="form-control" ng-model="FormData.pengalaman_kerja[2].tahun_keluar" />
+						</td>
+					</tr>
+					<tr>
+						<td align="center">4</td>
+						<td width="280" align="center">
+							<input ng-disabled="!FormData.pengalaman_kerja[2].nama_perusahaan||FormData.pengalaman_kerja[2].nama_perusahaan.length==0" placeholder="Nama Perusahaan" ng-keyup="ketik_jabatan(3)" type="text" class="form-control" ng-model="FormData.pengalaman_kerja[3].nama_perusahaan" />
+							<input placeholder="Jabatan" ng-keyup="ketik_jabatan(3)" type="text" class="form-control" ng-model="FormData.pengalaman_kerja[3].jabatan" ng-disabled="!FormData.pengalaman_kerja[3].nama_perusahaan||FormData.pengalaman_kerja[3].nama_perusahaan.length==0" ng-required="FormData.pengalaman_kerja[3].nama_perusahaan.length>0" style="margin-top: 5px;" />
+						</td>
+						<td>
+							<textarea ng-required="FormData.pengalaman_kerja[3].nama_perusahaan.length > 0" ng-disabled="!FormData.pengalaman_kerja[3].nama_perusahaan||FormData.pengalaman_kerja[3].nama_perusahaan.length==0" rows="6" class="form-control" ng-model="FormData.pengalaman_kerja[3].deskripsi"></textarea>
+						</td>
+						<td align="center">
+							<select style="margin-bottom: 5px;" class="form-control" ng-model="FormData.pengalaman_kerja[3].bulan_masuk" ng-required="FormData.pengalaman_kerja[3].nama_perusahaan.length > 0" ng-disabled="!FormData.pengalaman_kerja[3].nama_perusahaan||FormData.pengalaman_kerja[3].nama_perusahaan.length==0">
+								<option value="">Pilih bulan</option>
+								<option ng-repeat="bulan in months" value="{{bulan}}" ng-bind="bulan"></option>
+							</select>
+							<input placeholder="Tahun" ng-required="FormData.pengalaman_kerja[3].nama_perusahaan.length > 0" ng-disabled="!FormData.pengalaman_kerja[3].nama_perusahaan||FormData.pengalaman_kerja[3].nama_perusahaan.length==0" type="text" class="form-control" ng-model="FormData.pengalaman_kerja[3].tahun_masuk" />
+						</td>
+						<td align="center">
+							<select style="margin-bottom: 5px;" class="form-control" ng-model="FormData.pengalaman_kerja[3].bulan_keluar" ng-required="FormData.pengalaman_kerja[3].nama_perusahaan.length > 0" ng-disabled="!FormData.pengalaman_kerja[3].nama_perusahaan||FormData.pengalaman_kerja[3].nama_perusahaan.length==0">
+								<option value="">Pilih bulan</option>
+								<option ng-repeat="bulan in months" value="{{bulan}}" ng-bind="bulan"></option>
+							</select>
+							<input placeholder="Tahun" ng-required="FormData.pengalaman_kerja[3].nama_perusahaan.length > 0" ng-disabled="!FormData.pengalaman_kerja[3].nama_perusahaan||FormData.pengalaman_kerja[3].nama_perusahaan.length==0" type="text" class="form-control" ng-model="FormData.pengalaman_kerja[3].tahun_keluar" />
+						</td>
+					</tr>
+					<tr>
+						<td align="center">5</td>
+						<td width="280" align="center">
+							<input ng-disabled="!FormData.pengalaman_kerja[3].nama_perusahaan||FormData.pengalaman_kerja[3].nama_perusahaan.length==0" placeholder="Nama Perusahaan" ng-keyup="ketik_jabatan(4)" type="text" class="form-control" ng-model="FormData.pengalaman_kerja[4].nama_perusahaan" />
+							<input placeholder="Jabatan" ng-keyup="ketik_jabatan(4)" type="text" class="form-control" ng-model="FormData.pengalaman_kerja[4].jabatan" ng-disabled="!FormData.pengalaman_kerja[4].nama_perusahaan||FormData.pengalaman_kerja[4].nama_perusahaan.length==0" ng-required="FormData.pengalaman_kerja[4].nama_perusahaan.length>0" style="margin-top: 5px;" />
+						</td>
+						<td>
+							<textarea ng-required="FormData.pengalaman_kerja[4].nama_perusahaan.length > 0" ng-disabled="!FormData.pengalaman_kerja[4].nama_perusahaan||FormData.pengalaman_kerja[4].nama_perusahaan.length==0" rows="6" class="form-control" ng-model="FormData.pengalaman_kerja[4].deskripsi"></textarea>
+						</td>
+						<td align="center">
+							<select style="margin-bottom: 5px;" class="form-control" ng-model="FormData.pengalaman_kerja[4].bulan_masuk" ng-required="FormData.pengalaman_kerja[4].nama_perusahaan.length > 0" ng-disabled="!FormData.pengalaman_kerja[4].nama_perusahaan||FormData.pengalaman_kerja[4].nama_perusahaan.length==0">
+								<option value="">Pilih bulan</option>
+								<option ng-repeat="bulan in months" value="{{bulan}}" ng-bind="bulan"></option>
+							</select>
+							<input placeholder="Tahun" ng-required="FormData.pengalaman_kerja[4].nama_perusahaan.length > 0" ng-disabled="!FormData.pengalaman_kerja[4].nama_perusahaan||FormData.pengalaman_kerja[4].nama_perusahaan.length==0" type="text" class="form-control" ng-model="FormData.pengalaman_kerja[4].tahun_masuk" />
+						</td>
+						<td align="center">
+							<select style="margin-bottom: 5px;" class="form-control" ng-model="FormData.pengalaman_kerja[4].bulan_keluar" ng-required="FormData.pengalaman_kerja[4].nama_perusahaan.length > 0" ng-disabled="!FormData.pengalaman_kerja[4].nama_perusahaan||FormData.pengalaman_kerja[4].nama_perusahaan.length==0">
+								<option value="">Pilih bulan</option>
+								<option ng-repeat="bulan in months" value="{{bulan}}" ng-bind="bulan"></option>
+							</select>
+							<input placeholder="Tahun" ng-required="FormData.pengalaman_kerja[4].nama_perusahaan.length > 0" ng-disabled="!FormData.pengalaman_kerja[4].nama_perusahaan||FormData.pengalaman_kerja[4].nama_perusahaan.length==0" type="text" class="form-control" ng-model="FormData.pengalaman_kerja[4].tahun_keluar" />
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<h4>Keahlian / Skill</h4>
+			<p>Kosongkan jika tidak ada keahlian khusus</p>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th class="text-center">#</th>
+						<th>Nama Keahlian</th>
+						<th>Keterangan</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="center" width="30">1</td>
+						<td width="300">
+							<input type="text" class="form-control" ng-model="FormData.keahlian[0].nama_keahlian"
+							placeholder="Nama keahlian" />
+						</td>
+						<td>
+							<textarea class="form-control" ng-model="FormData.keahlian[0].keterangan"
+							rows="4" 
+							placeholder="Jelaskan tentang keahlian {{FormData.keahlian[0].nama_keahlian.toLowerCase()}} {{FormData.nama_personil}}" ng-disabled="!FormData.keahlian[0].nama_keahlian||FormData.keahlian[0].nama_keahlian.length==0" /></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td align="center" width="30">2</td>
+						<td width="300">
+							<input 
+							type="text" 
+							class="form-control" 
+							ng-model="FormData.keahlian[1].nama_keahlian"
+							placeholder="Nama keahlian"
+							ng-disabled="!FormData.keahlian[0].nama_keahlian||FormData.keahlian[0].nama_keahlian.length==0" />
+						</td>
+						<td>
+							<textarea 
+							class="form-control" 
+							ng-model="FormData.keahlian[1].keterangan"
+							rows="4" 
+							placeholder="Jelaskan tentang keahlian {{FormData.keahlian[1].nama_keahlian.toLowerCase()}} {{FormData.nama_personil}}" 
+							ng-disabled="!FormData.keahlian[1].nama_keahlian||FormData.keahlian[1].nama_keahlian.length==0" /></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td align="center" width="30">3</td>
+						<td width="300">
+							<input 
+							type="text" 
+							class="form-control" 
+							ng-model="FormData.keahlian[2].nama_keahlian"
+							placeholder="Nama keahlian"
+							ng-disabled="!FormData.keahlian[1].nama_keahlian||FormData.keahlian[1].nama_keahlian.length==0" />
+						</td>
+						<td>
+							<textarea 
+							class="form-control" 
+							ng-model="FormData.keahlian[2].keterangan"
+							rows="4" 
+							placeholder="Jelaskan tentang keahlian {{FormData.keahlian[2].nama_keahlian.toLowerCase()}} {{FormData.nama_personil}}" 
+							ng-disabled="!FormData.keahlian[2].nama_keahlian||FormData.keahlian[2].nama_keahlian.length==0" /></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td align="center" width="30">4</td>
+						<td width="300">
+							<input 
+							type="text" 
+							class="form-control" 
+							ng-model="FormData.keahlian[3].nama_keahlian"
+							placeholder="Nama keahlian"
+							ng-disabled="!FormData.keahlian[2].nama_keahlian||FormData.keahlian[2].nama_keahlian.length==0" />
+						</td>
+						<td>
+							<textarea 
+							class="form-control" 
+							ng-model="FormData.keahlian[3].keterangan"
+							rows="4" 
+							placeholder="Jelaskan tentang keahlian {{FormData.keahlian[3].nama_keahlian.toLowerCase()}} {{FormData.nama_personil}}" 
+							ng-disabled="!FormData.keahlian[3].nama_keahlian||FormData.keahlian[3].nama_keahlian.length==0" /></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td align="center" width="30">5</td>
+						<td width="300">
+							<input 
+							type="text" 
+							class="form-control" 
+							ng-model="FormData.keahlian[4].nama_keahlian"
+							placeholder="Nama keahlian"
+							ng-disabled="!FormData.keahlian[3].nama_keahlian||FormData.keahlian[3].nama_keahlian.length==0" />
+						</td>
+						<td>
+							<textarea 
+							class="form-control" 
+							ng-model="FormData.keahlian[4].keterangan"
+							rows="4" 
+							placeholder="Jelaskan tentang keahlian {{FormData.keahlian[4].nama_keahlian.toLowerCase()}} {{FormData.nama_personil}}" 
+							ng-disabled="!FormData.keahlian[4].nama_keahlian||FormData.keahlian[4].nama_keahlian.length==0" /></textarea>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>		
+</rd-widget-body>
+<rd-widget-footer>
+<button class="btn btn-success" ng-bind="'Submit'"></button>
+</rd-widget-footer>
+</rd-widget>
+</form>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<div style="display: none;" id="dlg-karyawan">
+    <form id="ff-karyawan" method="post">
+        <div id="tt-karyawan" style="width: 100%; height: 100%;">
+            <div title="Info Karyawan" style="width: 100%;height: 100%;padding: 5px;">
+                <div class="mypanel" title="Informasi Karyawan" style="padding: 15px;">
+                    <table width="100%" class="tbform" style="width: 100%;">
+                    	<tr>
+                    		<td valign="top" width="120px">
+                    			<label for="kry_nip">Nomor Induk Pusat</label>
+                    		</td>
+                    		<td>
+                    			<input class="textbox textbox-text" id="kry_nip" type="text" name="kry_nip">
+                    		</td>
+                    	</tr>
+                    	<tr>
+                            <td valign="top">
+                                <label for="kry_nama_lengkap">Nama Lengkap</label>
+                            </td>
+                            <td>
+                                <input class="textbox textbox-text" id="kry_nama_lengkap" type="text" name="kry_nama_lengkap">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top">
+                                <label for="kry_nama_panggilan">Nama Panggilan</label>
+                            </td>
+                            <td>
+                                <input class="textbox textbox-text" id="kry_nama_panggilan" type="text" name="kry_nama_panggilan">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top">
+                                <label for="kry_tanggal_masuk">Awal Bekerja</label>
+                            </td>
+                            <td>
+                                <input class="textbox textbox-text mydate" id="kry_tanggal_masuk" type="text" name="kry_tanggal_masuk">
+                                <span class="date-info">(BB/HH/TTTT)</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top">
+                                <label for="kry_status">Status Karyawan</label>
+                            </td>
+                            <td>
+                                <select style="width: 200px;" class="textbox textbox-text" id="kry_status" type="text" name="kry_status">
+                                    <option value="PR">Probation</option>
+                                    <option value="KK">Kontrak</option>
+                                    <option value="KT">Karyawan Tetap</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top">
+                                <label for="kry_jabatan">Jabatan</label>
+                            </td>
+                            <td>
+                                <input class="textbox textbox-text" id="kry_jabatan" type="text" name="kry_jabatan">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top">
+                                <label for="kry_divisi">Divisi</label>
+                            </td>
+                            <td>
+                                <select style="width: 100%;" class="textbox textbox-text" id="kry_divisi" type="text" name="kry_divisi"></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top">
+                                <label for="kry_departemen">Departemen</label>
+                            </td>
+                            <td>
+                                <select style="width: 100%;" class="textbox textbox-text" id="kry_departemen" type="text" name="kry_departemen"></select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>    
+            </div>
+            <div title="Data Personal" style="width: 100%;height: 100%;padding: 5px;">
+                <div class="mypanel" title="Informasi Personal" style="padding: 15px;">
+                    <table width="100%" class="tbform" style="width: 100%;">
+                        <tr>
+                            <td valign="top" width="120px">
+                                <label for="kry_tempat_lahir">Tempat, Tgl Lahir</label>
+                            </td>
+                            <td>
+                                <input style="width: 110px;" class="textbox textbox-text" id="kry_tempat_lahir" type="text" name="kry_tempat_lahir"> 
+                                <input class="textbox textbox-text mydate" id="kry_tanggal_lahir" type="text" name="kry_tanggal_lahir">
+                                <span class="date-info">(BB/HH/TTTT)</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top">
+                                <label for="kry_nomor_ktp">Nomor KTP</label>
+                            </td>
+                            <td>
+                                <input class="textbox textbox-text" id="kry_nomor_ktp" type="text" name="kry_nomor_ktp">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top">
+                                <label for="kry_alamat_ktp">Alamat KTP</label>
+                            </td>
+                            <td>
+                                <input onkeyup="$('#kry_alamat_sekarang').val(this.value)" class="textbox textbox-text" id="kry_alamat_ktp" type="text" name="kry_alamat_ktp">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top">
+                                <label for="kry_alamat_sekarang">Alamat Sekarang</label>
+                            </td>
+                            <td>
+                                <input class="textbox textbox-text" id="kry_alamat_sekarang" type="text" name="kry_alamat_sekarang">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top">
+                                <label for="kry_alamat_propinsi">Propinsi</label>
+                            </td>
+                            <td>
+                                <select style="width: 200px;" class="textbox textbox-text cb" id="kry_alamat_propinsi" type="text" name="kry_alamat_propinsi"></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top">
+                                <label for="kry_alamat_kabupaten">Kabupaten</label>
+                            </td>
+                            <td>
+                                <select style="width: 200px;" class="textbox textbox-text cb" id="kry_alamat_kabupaten" type="text" name="kry_alamat_kabupaten"></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top">
+                                <label for="kry_alamat_kecamatan">Kecamatan</label>
+                            </td>
+                            <td>
+                                <select style="width: 200px;" class="textbox textbox-text cb" id="kry_alamat_kecamatan" type="text" name="kry_alamat_kecamatan"></select>
+                            </td>
+                        </tr>
+                    </table>    
+                </div>    
+            </div>
+            <div title="Kontak" style="width: 100%;height: 100%;padding: 5px;">
+                <table 
+                    title="Informasi Kontak Karyawan" 
+                    id="dg-karyawan-kontak" 
+                    style="width: 100%;height: 420px;" 
+                    data-options="rownumbers:true"
+                    class="items"></table>
+            </div>
+            <div title="Riwayat Pendidikan" style="width: 100%;height: 100%;padding: 5px;">
+                <table 
+                    title="Riwayat Pendidikan Karyawan" 
+                    id="dg-karyawan-pendidikan" 
+                    style="width: 100%;height: 420px;" 
+                    data-options="rownumbers:true"
+                    class="items"></table>
+            </div>
+            <!-- <div title="Data Keluarga" style="width: 100%;height: 100%;padding: 15px;">
+                <table 
+                    title="Data Keluarga Karyawan" 
+                    id="dg-karyawan-keluarga" 
+                    style="width: 100%;height: 420px;" 
+                    data-options="rownumbers:true"
+                    class="items"></table>
+            </div> -->
+            <!-- <div title="Karir" style="width: 100%;height: 100%;padding: 15px;">
+            </div> -->
+        </div>
+    </form>    
+</div>

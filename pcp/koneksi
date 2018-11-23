@@ -1,0 +1,10 @@
+<?php
+$server = "http://103.27.207.198:1996"; //
+$username = "root";  //
+$password = "Q1w2e3r$"; //
+$database = "demo";
+
+$konek = mysql_connect($server, $username, $password) or die ("Gagal konek ke server MySQL" .mysql_error());
+$bukadb = mysql_select_db($database) or die ("Gagal membuka database $database" .mysql_error());
+
+?>

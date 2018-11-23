@@ -1,0 +1,236 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style>
+* {
+    box-sizing: border-box;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 24.33%;
+    padding: 10px;
+    height: 200px; /* Should be removed. Only for demonstration */
+}
+
+.kecil {
+    float: left;
+    width: 24.33%;
+    padding: 1px;
+    height: 40px; /* Should be removed. Only for demonstration */
+}
+
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+</style>
+
+<script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+  <script>
+    zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
+  </script>
+  <style>
+    html,
+    body,
+    #myChart {
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+  
+</head>
+<body>
+<div class="row">
+	<div class="col-xs-12">
+	<!-- Ini Layout Untuk Judul Peta Wilayah --->
+		<rd-widget>
+			<rd-widget-header title="Peta Wilayah Kerja">
+				Propinsi :
+				<div class="btn-group">
+				  <button type="button" class="btn btn-sm btn-default" ng-bind="currentPropinsi"></button>
+				  <button type="button" class="btn btn-sm btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				    <span class="caret"></span>
+				    <span class="sr-only">Toggle Dropdown</span>
+				  </button>
+				  <ul class="dropdown-menu" style="right: 0px;left: auto;">
+				    <li><a ng-click="peta_propinsi(false)" href="javascript:void(0)">Semua Propinsi</a></li>
+				    <li role="separator" class="divider"></li>
+				    <li><a ng-click="peta_propinsi(propinsi)" href="javascript:void(0)" ng-repeat="propinsi in data.peta_propinsi">{{propinsi.nama_propinsi}}</a></li>
+				  </ul>
+				</div>
+			</rd-widget-header>
+			<!--Di teruskan layout untuk pemetaan berdasarkan icon-->
+			<rd-widget-body classes="no-padding">
+				<div id="map_dashboard" style="height: 400px;width: 100%;"></div>
+				<!--<div id="canvas"></div>
+				<div id="legend" class="panel panel-primary">
+                <div class="panel-heading">Legenda</div>-->
+			</rd-widget-body>
+		</rd-widget>		
+	</div>
+
+	<!---Mengatur Ukuran Div Pada Tata Letak Pie Chart --->
+	<div class="col-md-4 col-xs-12">
+		<rd-widget>
+        	<rd-widget-body>
+				<div id="level-chart" style="width: 95%; height: 300px;" align="right"></div> 
+			</rd-widget-body>
+		</rd-widget>
+	</div>
+    
+    <!--- Tata Letak Logo --->
+	<div class="col-md-8 col-xs-12">
+		<rd-widget>
+			<font color="#000000"><rd-widget-header title="Tingkat Kualifikasi"></rd-widget-header></font>
+			<rd-widget-body>
+				<div style="width: 100%; height: 250px;">	
+                    <center>
+  						<div class="column" style="background-color:#FFF; border-style:inset; color:#A3031E">
+    						<h4><font color="#000000">Gada Pratama</font></h4>
+                        	<img src="./icon/PG.png" alt="Pratama Gada" width="100%" height="70%">
+							<!--<div class="column" style="background-color:#FFF; border-style:dashed; color:#A3031E">-->
+                            <p align="center"></p>
+                        </div>
+  						<div class="column" style="background-color:#FFF; border-style:inset; color:#A3031E">
+                        	<h4><font color="#000000">Gada Madya</font></h4>
+    						<img src="./icon/MG.png" alt="Pratama Gada" width="100%" height="70%">
+  						</div>
+  						<div class="column" style="background-color:#FFF; border-style:inset; color:#A3031E">
+                        	<h4><font color="#000000">Gada Utama</font></h4>
+    						<img src="./icon/UG.png" alt="Pratama Gada" width="100%" height="70%">
+                            
+  						</div>
+                        <div class="column" style="background-color:#FFF; border-style:inset; color:#A3031E">
+                        	<h4><font color="#000000">Non Kualifikasi</font></h4>
+    						<img src="./icon/satpamnonkualifikasi.png" alt="Pratama Gada" width="100%" height="70%">
+  						</div>
+                    <!-- Untuk memanggil data, dan tepat dibawah logo -->
+           			<div class="kecil" style="background-color:#FFF; border-style:inset; color:#A3031E">
+           					<p align="center">
+    						<h5><font color="#003366" face="Arial Black, Gadget, sans-serif"><div ng-bind="(intval(data.kualifikasi[1].y))+' Personil'"></div></font></h5>
+							<!--<div class="column" style="background-color:#FFF; border-style:dashed; color:#A3031E">-->
+                            </p>
+                        </div>
+						<div class="kecil" style="background-color:#FFF; border-style:inset; color:#A3031E">
+							<p align="center">
+    						<!--<div ng-bind="(intval(data.kualifikasi[0].y)) | number:0"></div>-->
+    						<h5><font color="#003366" face="Arial Black, Gadget, sans-serif"><div ng-bind="(intval(data.kualifikasi[0].y))+' Personil'"></div></font></h5>
+							<!--<div class="column" style="background-color:#FFF; border-style:dashed; color:#A3031E">-->
+                            </p>
+                        </div>
+						<div class="kecil" style="background-color:#FFF; border-style:inset; color:#A3031E">
+							<p align="center">
+    						<h5><font color="#003366" face="Arial Black, Gadget, sans-serif"><div ng-bind="(intval(data.kualifikasi[2].y))+' Personil'"></div></font></h5>
+							<!--<div class="column" style="background-color:#FFF; border-style:dashed; color:#A3031E">-->
+                            </p>
+                        </div>
+						<div class="kecil" style="background-color:#FFF; border-style:inset; color:#A3031E">
+							<p align="center">
+    						<h5><font color="#003366" face="Arial Black, Gadget, sans-serif"><div ng-bind="(intval(data.kualifikasi[3].y))+' Personil'"></div></font></h5>
+							<!--<div class="column" style="background-color:#FFF; border-style:dashed; color:#A3031E">-->
+                            </p>
+                        </div>
+						</center>
+				</div>
+			</rd-widget-body>
+		</rd-widget>
+	</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<rd-widget>
+			<rd-widget-body>
+				<div id="grafikpropinsi" style="width: 100%; height: 360px;"></div> 
+			</rd-widget-body>
+		</rd-widget>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<rd-widget>
+			<rd-widget-body>
+				<div id="11" style="width: 100%; height: 360px;"></div> 
+			</rd-widget-body>
+		</rd-widget>
+	</div>
+</div>
+
+<div class="row hidden">
+	<div class="col-md-12">
+		<rd-widget>
+			<rd-widget-header title="Grafik Jam Kerja Personil">
+				<angucomplete id="ex1"
+	              	placeholder="Ketik nama personil"
+	              	pause="100"
+	              	style="width: 300px;"
+	              	selectedobject="autocompletePersonil"
+	              	url="api/index.php/personil/autocomplete?s="
+          			searchfields="nama_personil"
+	              	titlefield="nama_personil"
+	              	descriptionfield="nama_personil"
+	              	minlength="2"
+	              	inputclass="form-control form-control-autocomplete form-control-small"/>
+			</rd-widget-header>
+			<rd-widget-body>
+				<div id="timesheet-chart-container" style="width: 100%; height: 400px;">
+					<p>Pilih personil terlebih dahulu</p>
+					<p>{{autocompletePersonil}}</p>
+				</div> 
+			</rd-widget-body>
+		</rd-widget>
+	</div>
+</div>
+<div class="row">
+<div class="col-md-6 hidden">
+<div class="row">
+	<div class="col-md-6 col-xs-12" style="padding: 0px 5px 0px 0px;">
+		<rd-widget>
+			<rd-widget-body>
+				<div class="widget-icon gray pull-left">
+					<i class="fa fa-users"></i>
+				</div>
+				<div class="title" ng-bind="(intval(data.level.S)+intval(data.level.D)+intval(data.level.C)) | number:0"></div>
+				<div class="comment">Total Personil</div>
+			</rd-widget-body>
+		</rd-widget>
+	</div>
+	<div class="col-md-6 col-xs-12" style="padding: 0px 0px 0px 5px;">
+		<rd-widget>
+			<rd-widget-body>
+				<div class="widget-icon purple pull-left">
+					<i class="fa fa-address-book-o"></i>
+				</div>
+				<div class="title" ng-bind="data.klien | number:0"></div>
+				<div class="comment">Klien</div>
+			</rd-widget-body>
+		</rd-widget>
+	</div>
+	<div class="col-md-6 col-xs-12" style="padding: 0px 5px 0px 0px;">
+		<rd-widget>
+			<rd-widget-body>
+				<div class="widget-icon cyan pull-left">
+					<i class="fa fa-flag"></i>
+				</div>
+				<div class="title" ng-bind="data.proyek | number:0"></div>
+				<div class="comment">Proyek</div>
+			</rd-widget-body>
+		</rd-widget>
+	</div>
+</div>
+</div>
+</div>
+</div>
+<!-- <div class="row alerts-container" data-ng-controller="AlertsCtrl" data-ng-show="alerts.length">
+	<div class="col-xs-12">
+		<alert data-ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+	</div>
+</div> -->
+</body>
+</html>
