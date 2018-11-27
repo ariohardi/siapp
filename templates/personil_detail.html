@@ -8,7 +8,7 @@
 <div ng-class="lokasi_personil.length == 3 ? 'col-md-5' : 'col-md-8 col-md-offset-2'">
 <rd-widget>
 <rd-widget-header icon="fa-user" title="Detail Personil">
-	<a href="#/personil" class="btn btn-sm btn-danger"><i class="fa fa-arrow-left"></i> Kembali</a>
+	<a href="#/personil" ><button class="btn btn-sm btn-default ng-scope"><i class="fa fa-arrow-left"></i>Kembali</button></a>
 	<a href="/api/index.php/printing/cv/{{route[1]}}" target="_blank" class="btn btn-sm btn-default"><i class="fa fa-print"></i> Cetak CV</a>
 </rd-widget-header>
 <rd-widget-body classes="no-padding" loading="{{loading}}">

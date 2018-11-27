@@ -27,13 +27,13 @@
 <rd-widget>
 <form ng-submit="submit()">
 <rd-widget-header icon="fa-sitemap" title="{{widget_title}}">
-<a href="#/klien">Batal</a>
+<a href="#/klien"><button class="btn btn-sm btn-default ng-scope"><i class="fa fa-close"></i>Batal</button></a>
 </rd-widget-header>
 <rd-widget-body classes="no-padding" loading="{{loading}}">
 	<br/>
 	<div class="row">
 		<div class="col-md-6">
-			<h4 style="margin: 0px 0px 20px 0px;" class="text-orange text-bold">Data Persuahaan</h4>
+			<h4 style="margin: 0px 0px 20px 0px;" class="text-orange text-bold">Data Perusahaan</h4>
 			<rd-widget-form-group label="Nama Klien">
 				<input ng-required="true" type="text" class="form-control" ng-model="FormData.nama_klien">
 			</rd-widget-form-group>

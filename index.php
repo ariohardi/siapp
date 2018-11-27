@@ -273,7 +273,7 @@
         </li>
         
          <li class="sidebar-list">
-          <a href="#/command_center">Command Center CCTV <span class="menu-icon fa fa-bell-o"></span></a>
+          <a href="#/command_center"><font style="font-size: 13px">Command Center CCTV </font><span class="menu-icon fa fa-video-camera"></span></a>
         </li>
         <?php
            }
