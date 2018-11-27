@@ -12,13 +12,16 @@ angular.module("RDash").controller("Pesan_baru",function($scope,$rootScope,$http
 			console.log(data);
 			$scope.loading = false;
 			$.toast({
-			    heading: data.status ? 'Berhasil' : 'Error',
+			    heading: data.status ? 'Error' : 'Berhasil',
 			    text: data.message,
 			    hideAfter: $rootScope.toastTimeout,
-			    icon: data.status ? 'success' : 'error',
+			    icon: data.status ? 'error' : 'success',
 			    position: 'top-right'
 			});
 			if(data.status){
+				$location.path("/pesan");
+			}
+			else {
 				$location.path("/pesan");
 			}
 		}).error(function(err){ console.log(err); });
