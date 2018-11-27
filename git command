@@ -1,0 +1,21 @@
+posisikan terminal berada di folder yang berisikan .git
+
+urutan push ke repository online:
+
+1. add file yang ingin di commit
+git add * -->  untuk menambah seluruh file ke repository local
+git add namafolder/namafile
+
+2. commit file yang ingin di push
+git commit -m "isi commit" --> untuk commit file
+
+3. push file ke repository online
+git push --> push ke repository online.
+
+urutan pull dari repository online ke lokal:
+1.
+
+git pull --> tarik file dari repository online ke lokal (tanpa branch)
+
+git pull origin namabranch --> tarik file dari repository 
+				online ke lokal dengan nama branch
