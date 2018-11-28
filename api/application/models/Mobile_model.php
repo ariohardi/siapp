@@ -78,16 +78,6 @@ class Mobile_model extends CI_Model {
 		// return $this->db->last_query();
 	}
 
-	public function baca_kode_patroli()
-	{
-		$this->db->select('kode_patroli.*, personil.nama_personil, personil.upload_foto');
-		$this->db->join('personil','personil.ID=kode_patroli.id_personil');
-		$data = $this->db->where('kode',preg_replace("/[^A-Za-z0-9 ]/", '', $this->input->post('kode',true)))->get('kode_patroli')->row();
-		if($data) $data->md5_id = md5(md5($data->id_personil));
-		return $data;
-		// return $this->db->last_query();
-	}
-
 	public function proses_absensi($data)
 	{
 		unset($data->base64);
@@ -122,21 +112,6 @@ class Mobile_model extends CI_Model {
 		$kode = md5(uniqid());
 		$this->db->where('id_personil',$this->input->post('id_personil',true))->delete('kode_absensi');
 		$insert = $this->db->insert('kode_absensi',array(
-			'device_id'=>$this->input->post('device_id',true),
-			'kode'=>$kode,
-			'id_personil'=>$this->input->post('id_personil',true),
-			'text'=>$this->input->post('text',true),
-			'tgl_buat'=>date("Y-m-d H:i:s")
-			));
-		if($insert) return $kode;
-		else return "failed";
-	}
-
-	public function generate_kode_patroli()
-	{
-		$kode = md5(uniqid());
-		$this->db->where('id_personil',$this->input->post('id_personil',true))->delete('kode_patroli');
-		$insert = $this->db->insert('kode_patroli',array(
 			'device_id'=>$this->input->post('device_id',true),
 			'kode'=>$kode,
 			'id_personil'=>$this->input->post('id_personil',true),

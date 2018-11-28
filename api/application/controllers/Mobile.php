@@ -53,15 +53,9 @@ class Mobile extends CI_Controller {
 		exit(json_encode($data));
 	}
 
-	public function generate_kode_patroli()
+	public function baca_kode_absen()
 	{
-		$data = $this->Mobile_model->generate_kode_patroli();
-		exit(json_encode($data));
-	}
-
-	public function baca_kode_patroli()
-	{
-		$data = $this->Mobile_model->baca_kode_patroli();
+		$data = $this->Mobile_model->baca_kode_absen();
 		exit(json_encode($data));
 	}
 
