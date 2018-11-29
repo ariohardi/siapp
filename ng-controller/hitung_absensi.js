@@ -9,6 +9,7 @@ angular.module("RDash").controller("Hitung_Absensi",function($scope,$rootScope,$
 	$scope.date = new Date();
 	$scope.filter.tanggal_awal = "2018-04-18";
 	$scope.filter.tanggal_akhir = "2018-07-18";
+	$scope.totalDurasi = 0;
 	$scope.tanggal = $scope.date.getFullYear() + "-" + $rootScope.angka_bulan[$scope.date.getMonth()] + "-"+ ($scope.date.getDate() < 10 ? '0'+$scope.date.getDate() : $scope.date.getDate());
 	$scope.tanggal_start = $scope.date.getFullYear() + "-" + $rootScope.angka_bulan[$scope.date.getMonth()] + "-"+ ($scope.date.getDate() < 10 ? '0'+$scope.date.getDate() : $scope.date.getDate());
 	$scope.tanggal_end = $scope.date.getFullYear() + "-" + $rootScope.angka_bulan[$scope.date.getMonth()] + "-"+ ($scope.date.getDate() < 10 ? '0'+$scope.date.getDate() : $scope.date.getDate());
@@ -39,7 +40,7 @@ angular.module("RDash").controller("Hitung_Absensi",function($scope,$rootScope,$
 						var jam = jamInt;
 						var min = minInt;
 						if(parseInt(jamInt)<10){
-							jam = "0"+jam;
+							jam = jam;
 						}
 						if(parseInt(minInt)<10){
 							min = "0"+min;
@@ -87,7 +88,7 @@ angular.module("RDash").controller("Hitung_Absensi",function($scope,$rootScope,$
 						var jam = jamInt;
 						var min = minInt;
 						if(parseInt(jamInt)<10){
-							jam = "0"+jam;
+							jam = jam;
 						}
 						if(parseInt(minInt)<10){
 							min = "0"+min;
@@ -104,6 +105,7 @@ angular.module("RDash").controller("Hitung_Absensi",function($scope,$rootScope,$
 					}
 				});
 			$scope.array_absensi = data;
+			$scope.totalDurasi = totalDurasi;
 			}).error(function(err){ console.log(err); });
 	}
 
@@ -134,7 +136,7 @@ angular.module("RDash").controller("Hitung_Absensi",function($scope,$rootScope,$
 						var jam = jamInt;
 						var min = minInt;
 						if(parseInt(jamInt)<10){
-							jam = "0"+jam;
+							jam = jam;
 						}
 						if(parseInt(minInt)<10){
 							min = "0"+min;
@@ -151,6 +153,7 @@ angular.module("RDash").controller("Hitung_Absensi",function($scope,$rootScope,$
 					}
 				});
 			$scope.array_absensi = data;
+			$scope.totalDurasi = totalDurasi;
 			}).error(function(err){ console.log(err); });
 	}
 
