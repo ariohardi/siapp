@@ -75,6 +75,7 @@ angular.module("RDash").controller("Hitung_Absensi",function($scope,$rootScope,$
 				$scope.loading = false;
 				var datanya = [];
 				var datahold = [];
+				var totalDurasi = 0;
 				angular.forEach(data, function(v, k){
 					console.log('v',v);
 					if(typeof v.jam_pulang !== "undefined"){
@@ -121,6 +122,7 @@ angular.module("RDash").controller("Hitung_Absensi",function($scope,$rootScope,$
 				$scope.loading = false;
 				var datanya = [];
 				var datahold = [];
+				var totalDurasi = 0;
 				angular.forEach(data, function(v, k){
 					console.log('v',v);
 					if(typeof v.jam_pulang !== "undefined"){
