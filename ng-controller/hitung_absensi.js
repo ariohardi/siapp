@@ -92,6 +92,7 @@ angular.module("RDash").controller("Hitung_Absensi",function($scope,$rootScope,$
 							min = "0"+min;
 						}
 						data[k].durasi = jam+" jam "+ min + " menit";
+						totalDurasi += jam;
 					} else {
 						data[k].durasi = "";
 					}	
@@ -137,6 +138,7 @@ angular.module("RDash").controller("Hitung_Absensi",function($scope,$rootScope,$
 							min = "0"+min;
 						}
 						data[k].durasi = jam+" jam "+ min + " menit";
+						totalDurasi += jam;
 					} else {
 						data[k].durasi = "";
 					}	
