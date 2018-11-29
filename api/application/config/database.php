@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'demo',
+	'hostname' => $_SERVER['SERVER_NAME'] === 'localhost' || strpos($_SERVER['SERVER_NAME'], '168') > 0 ? 'localhost' : 'localhost',
+	'username' => $_SERVER['SERVER_NAME'] === 'localhost' || strpos($_SERVER['SERVER_NAME'], '168') > 0 ? 'root' : 'root',
+	'password' => $_SERVER['SERVER_NAME'] === 'localhost' || strpos($_SERVER['SERVER_NAME'], '168') > 0 ? '' : 'Q1w2e3r$',
+	'database' => $_SERVER['SERVER_NAME'] === 'localhost' || strpos($_SERVER['SERVER_NAME'], '168') > 0 ? 'bravo' : 'siapp',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => 'ganusa_',
 	'pconnect' => FALSE,
