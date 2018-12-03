@@ -1,5 +1,5 @@
 <?php
-session_start();
+session_start(); 
 //clear session from disk
 session_destroy();
 
@@ -8,7 +8,7 @@ session_destroy();
 <!DOCTYPE html>
 <!-- saved from url=(0030)http://update.tidy.eideus.com/ -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+		
 
 		<title>Login</title>
 
@@ -25,7 +25,7 @@ session_destroy();
 			}
 			html, body {
 			    height:100% !important;
-			}
+			} 
 			body {
 				background: url(bg-login-back.jpg) no-repeat center !important;
 				background-size: 100% 100% !important;
@@ -36,7 +36,7 @@ session_destroy();
 			}
 		</style>
 	<body>
-
+	
 		<div class="apollo" style="border-color: transparent;max-width: 420px;box-shadow: none;">
 			<div style="background: url(bg-login.png);background-size: 100% 100%;padding: 0px;" class="apollo-container clearfix">
 				<div style="padding: 56px 45px 40px 45px;">
@@ -50,24 +50,17 @@ session_destroy();
 				</div>
 				<div class="apollo-login" style="max-width: none;">
 					<form class="form-signin" id="apollo-login-form" style="margin-top: 240px">
-
 						<div class="form-group">
-							<input name="email" type="email" value="" class="form-control email" placeholder="Alamat email" onchange="this.setCustomValidity(validity.valueMissing ? 'Masukkan alamat email Anda dengan benar !' : '');" id="email" required>
+							<input name="email" required type="email" value="" class="form-control email" placeholder="Alamat email">
 						</div>
-
 						<div class="form-group">
-							<input name="password" required type="password" value="" class="form-control" placeholder="Kata sandi" onchange="this.setCustomValidity(validity.valueMissing ? 'Masukkan password Anda' : '');" id="pass" required>
+							<input name="password" required type="password" value="" class="form-control" placeholder="Kata sandi">
 						</div>
-
 						<button class="btn btn-lg btn-signin btn-block" type="submit">Masuk</button>
 					</form>
 
 					<p class="apollo-register-account"><a href="javascript:void(0)" class="password-link"><small>Lupa password?</small></a> </p>
 					<br/><br/>
-					<script type="text/javascript">
-				document.getElementById("email").setCustomValidity("Masukkan email Anda dengan benar !");
-				document.getElementById("pass").setCustomValidity("Masukkan password Anda");
-			</script>
 				</div>
 
 				<!-- <div class="apollo-forgotten-password">
@@ -123,5 +116,5 @@ session_destroy();
 				});
 			})
 		</script>
-
+	
 </body></html>
