@@ -52,7 +52,7 @@ session_destroy();
 					<form class="form-signin" id="apollo-login-form" style="margin-top: 240px">
 
 						<div class="form-group">
-							<input name="email" type="email" value="" class="form-control email" placeholder="Alamat email" onchange="this.setCustomValidity(validity.valueMissing ? 'Masukkan email Anda dengan benar !' : '');" id="email" required>
+							<input name="email" type="email" value="" class="form-control email" placeholder="Alamat email" onchange="this.setCustomValidity(validity.valueMissing ? 'Masukkan alamat email Anda dengan benar !' : '');" id="email" required>
 						</div>
 
 						<div class="form-group">
@@ -64,6 +64,10 @@ session_destroy();
 
 					<p class="apollo-register-account"><a href="javascript:void(0)" class="password-link"><small>Lupa password?</small></a> </p>
 					<br/><br/>
+					<script type="text/javascript">
+				document.getElementById("email").setCustomValidity("Masukkan email Anda dengan benar !");
+				document.getElementById("pass").setCustomValidity("Masukkan password Anda");
+			</script>
 				</div>
 
 				<!-- <div class="apollo-forgotten-password">
@@ -106,11 +110,6 @@ session_destroy();
 		<script src="./index_files/bootstrap.min.js"></script>
 		<script src="./index_files/main.js"></script>
 		<script src="./index_files/jQueryRotate.js"></script>
-
-		<script type="text/javascript">
-  document.getElementById("email").setCustomValidity("Masukkan email Anda dengan benar !");
-  document.getElementById("pass").setCustomValidity("Masukkan password Anda");
-</script>
 
 		<script>
 			$(function(){
