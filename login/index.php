@@ -52,7 +52,7 @@ session_destroy();
 					<form class="form-signin" id="apollo-login-form" style="margin-top: 240px">
 
 						<div class="form-group">
-							<input name="email" type="email" value="" class="form-control email" placeholder="Alamat email" onchange="this.setCustomValidity(validity.valueMissing ? 'Masukkan alamat email Anda dengan benar !' : '');" id="email" required>
+							<input name="email" type="email" value="" class="form-control email" placeholder="Alamat email" onchange="this.setCustomValidity(validity.valueMissing ? 'Masukkan email Anda dengan benar !' : '');" id="email" required>
 						</div>
 
 						<div class="form-group">
