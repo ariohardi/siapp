@@ -140,7 +140,7 @@ class Hr_model extends CI_Model {
 		 $this->db->select('*');
 		 $this->db->from('absensi');
 		 $this->db->join('personil','personil.ID=absensi.id_personil');
-		 $this->db->join('regu','personil.id_regu=regu.ID');
+		/* $this->db->join('regu','personil.id_regu=regu.ID'); */
 		 if($this->input->post('keyword')){
 			$this->db->like('nama_personil',$this->input->post('keyword',true));
 		 }
