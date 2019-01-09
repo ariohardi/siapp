@@ -27,7 +27,7 @@ session_destroy();
 			    height:100% !important;
 			} 
 			body {
-				background: url(bg2.jpg) no-repeat center !important;
+				background: url(bg-login-back.jpg) no-repeat center !important;
 				background-size: 100% 100% !important;
 				background-position: center;
 			}
@@ -40,24 +40,26 @@ session_destroy();
 		<div class="apollo" style="border-color: transparent;max-width: 420px;box-shadow: none;">
 			<div style="background: url(bg-login.png);background-size: 100% 100%;padding: 0px;" class="apollo-container clearfix">
 				<div style="padding: 56px 45px 40px 45px;">
+				<img style="float: right;margin-top: -30px;margin-right: -20px;" width="52" src="../logo/guard.png">
+				<img style="margin-top: -30px;margin-left: -20px;" width="52" src="../logo/logo_koperasi.png">
 				<div id="coin-flip-cont" class="apollo-facebook">
 					<div id="coin" class="apollo-image">
-						<img src="logoJanusa.png" class="front">
-						<img src="logoJanusa.png" class="back">
+						<img src="../LogoJN1.png?a=4" class="front">
+						<img src="../logo1a.jpg?a=2" class="back">
 					</div>
 				</div>
 				<div class="apollo-login" style="max-width: none;">
 					<form class="form-signin" id="apollo-login-form" style="margin-top: 240px">
 						<div class="form-group">
-							<input name="email" required type="email" value="" class="form-control email" placeholder="Username">
+							<input name="email" required type="email" value="" class="form-control email" placeholder="Alamat email">
 						</div>
 						<div class="form-group">
-							<input name="password" required type="password" value="" class="form-control" placeholder="Password">
+							<input name="password" required type="password" value="" class="form-control" placeholder="Kata sandi">
 						</div>
 						<button class="btn btn-lg btn-signin btn-block" type="submit">Masuk</button>
 					</form>
 
-					<p class="apollo-register-account"><a href="javascript:void(0)" class="password-link" style="color: white"><small>Lupa password?</small></a> </p>
+					<p class="apollo-register-account"><a href="javascript:void(0)" class="password-link"><small>Lupa password?</small></a> </p>
 					<br/><br/>
 				</div>
 

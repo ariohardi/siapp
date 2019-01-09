@@ -221,20 +221,104 @@
       <ul class="sidebar">
         <li class="sidebar-main">
           <a ng-click="toggleSidebar()">
-            E-RAKOP
+            SIAPP
             <span class="menu-icon glyphicon glyphicon-transfer"></span>
           </a>
         </li>
         <li class="sidebar-title"><span>Navigasi</span></li>
         <li class="sidebar-list">
-          <a href="#/klien">Jadwal Rapat <span class="menu-icon fa fa-calendar"></span></a>
+          <a href="#">Overview <span class="menu-icon fa fa-tachometer"></span></a>
+        </li>
+        <?php
+          if($_SESSION['role'] != '11')
+          {
+        ?>
+        <li class="sidebar-list">
+          <a href="#/cabang">Kantor Cabang <span class="menu-icon fa fa-sitemap"></span></a>
         </li>
         <li class="sidebar-list">
-          <a href="#/personil">Anggota<span class="menu-icon fa fa-user"></span></a>
+          <a href="#/klien">Data Klien <span class="menu-icon fa fa-address-book-o"></span></a>
         </li>
         <li class="sidebar-list">
-          <a href="#/proyek">Hasil Rapat<span class="menu-icon fa fa-newspaper-o"></span></a>
+          <a href="#/proyek">Proyek <span class="menu-icon fa fa-flag"></span></a>
         </li>
+        <?php
+           }
+        ?>
+        <li class="sidebar-list">
+          <a href="#/personil">Data Personil <span class="menu-icon fa fa-user"></span></a>
+        </li>
+        <?php
+            if($_SESSION['role'] == '4' || $_SESSION['role'] == '6' || $_SESSION['role'] == '7' || $_SESSION['role'] == '8' || $_SESSION['role'] == '9' || $_SESSION['role'] == '10' || $_SESSION['role'] == '11' || $_SESSION['role'] == '0')
+          {
+        ?>
+        <li class="sidebar-list">
+          <a href="#/regu">Regu <span class="menu-icon fa fa-group"></span></a>
+        </li>
+        <?php
+           }
+        ?>
+        <li class="sidebar-list">
+          <a href="#/pesan">Instruksi <span class="menu-icon fa fa-warning"></span></a>
+        </li>
+        <?php
+            if($_SESSION['role'] == '4' || $_SESSION['role'] == '9' || $_SESSION['role'] == '11' || $_SESSION['role'] == '0')
+          {
+        ?>
+        <li class="sidebar-list">
+          <a href="#/laporan_personil">Laporan Personil <span class="menu-icon fa fa-file"></span></a>
+        </li>
+        <li class="sidebar-list">
+          <a href="#/panic_signal">Sinyal Tombol Panik <span class="menu-icon fa fa-bullseye"></span></a>
+        </li>
+        
+         <li class="sidebar-list">
+          <a href="#/command_center"><font style="font-size: 13px">Command Center CCTV </font><span class="menu-icon fa fa-video-camera"></span></a>
+        </li>
+        <?php
+           }
+        ?>
+        <!-- <li class="sidebar-list">
+          <a href="#/managemen_arsip">Managemen Arsip <span class="menu-icon fa fa-folder"></span></a>
+        </li> -->
+        <?php
+          if($_SESSION['role'] == '2' || $_SESSION['role'] == '4' ||  $_SESSION['role'] == '7' || $_SESSION['role'] == '9' || $_SESSION['role'] == '11' || $_SESSION['role'] == '0')
+          {
+        ?>
+        <li class="sidebar-list">
+          <a href="#/hitung_absensi">Hitung Absensi <span class="menu-icon fa fa-folder"></span></a>
+        </li>
+        
+        <!-- 
+        <li class="sidebar-list">
+          <a href="#/absensi">Perhitungan Absensi <span class="menu-icon fa fa-folder"></span></a>
+        </li>
+        <li class="sidebar-list">
+          <a href="javascript:void(0)">Update Berita <span class="menu-icon fa fa-newspaper-o"></span></a>
+        </li>
+
+        <li class="sidebar-list">
+          <a href="javascript:void(0)">Website <span class="menu-icon fa fa-globe"></span></a>
+        </li> -->
+        <!--<li class="dropdown-menu">--->
+        <!--<a class="dropdown-toggle" data-toggle="dropdown" href="#">Pilihan Chatting-->
+          <!--<span class="caret"></span></a>
+				<ul class="dropdown-menu">
+                	<li><a href="#/online_chatting">Chatting Personal</a></li>
+                   	<li><a href="#">Grup Chat</a></li>
+                </ul>-->
+        <?php
+          }
+
+          if($_SESSION['role'] == '1' || $_SESSION['role'] == '4' ||  $_SESSION['role'] == '6' || $_SESSION['role'] == '8' || $_SESSION['role'] == '0')
+          {
+        ?>
+        <li class="sidebar-list">
+          <a href="#/administrator">Daftar Admin <span class="menu-icon fa fa-address-card"></span></a>
+        </li>
+        <?php
+          }
+        ?>
         <!-- <li class="sidebar-list" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <a href="#/absensi">Data Absensi Personil <span class="menu-icon fa fa-clock-o"></span></a>
         </li> -->
@@ -269,7 +353,7 @@
             <div class="user pull-right">
               <div class="item dropdown">
                 <a href="#" class="dropdown-toggle">
-                  <img style="height: 60px !important;width: auto !important;margin-top: 4px !important" src="login/Koperas_Janusa.png?a=1">
+                  <img style="height: 60px !important;width: auto !important;margin-top: 4px !important;" src="LogoJN1_.png?a=1">
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
                   <li class="dropdown-header">
