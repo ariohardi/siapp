@@ -7,9 +7,8 @@
 <div class="row">
 <div class="col-lg-12">
 <rd-widget>
-	<rd-widget-header icon="fa-address-book-o" title="Data Klien">
-		<a target="_blank" href="/siapp/api/index.php/printing/data_klien?{{query_string}}" class="btn btn-default btn-sm"><i class="fa fa-print"></i>Cetak</a>
-		<a href="#/klien_baru"><button class="btn btn-sm btn-default ng-scope"><i class="fa fa-plus"></i>Tambah Klien</button></a>
+	<rd-widget-header icon="fa fa-calendar" title="Jadwal Rapat">
+		<a href="#/klien_baru"><button class="btn btn-sm btn-default ng-scope"><i class="fa fa-plus"></i>Tambah Rapat</button></a>
 	</rd-widget-header>
 	<rd-widget-body classes="large no-padding" loading="{{loading}}">
 		<div class="table-responsive">
@@ -17,10 +16,12 @@
 		<thead>
 			<tr>
 				<th class="text-center">#</th>
-				<th>Nama Klien</th>
-				<th>Propinsi</th>
-				<th>Kota</th>
-				<th>Telp</th>
+				<th>Rapat</th>
+				<th>Mulai</th>
+				<th>Selesai</th>
+				<th>Jumlah Peserta</th>
+				<th>Keterangan</th>
+				<th>&nbsp &nbsp &nbsp Anggota</th>
 				<th class="text-center">Opsi</th>
 			</tr>
 		</thead>
@@ -31,9 +32,15 @@
 				<td ng-bind="klien.nama_propinsi"></td>
 				<td ng-bind="klien.nama_kabupaten"></td>
 				<td ng-bind="klien.telepon"></td>
+				<td ng-bind="klien.telepon"></td>
+				<td>
+					<a class="btn btn-success btn-xs" href="#/detail_klien/{{klien.ID}}">
+						<i class="fa fa-users"></i> Lihat Anggota
+					</a>
+				</td>
 				<td width="250" align="center">
 					<a class="btn btn-primary btn-xs" href="#/detail_klien/{{klien.ID}}">
-						<i class="fa fa-print"></i> Tampil
+						<i class="fa fa-clipboard"></i> Lihat
 					</a>
                     <a class="btn btn-default btn-xs" href="#/edit_klien/{{klien.ID}}">
 						<i class="fa fa-pencil"></i> Edit
@@ -57,9 +64,9 @@
 		          <li><a href="#">&raquo;</a></li>
 		</ul>
 	<div class="col-md-3" style="margin-bottom: -10px;margin-top: 0px;">
-			<input text="text" ng-keyup="cari()" placeholder="Ketik nama klien" class="form-control input-sm ng-scope" ng-model="filter.keyword" style="width:70%">
+			<input text="text" ng-keyup="cari()" placeholder="Ketik nama rapat" class="form-control input-sm ng-scope" ng-model="filter.keyword" style="width:70%">
 	</div>
-	<p class="text-right">Total <span ng-bind="array_klien.length"></span> klien</p>
+	<p class="text-right">Total <span ng-bind="array_klien.length"></span> rapat</p>
 	</div>
 	<!-- <div class="clearfix"></div> -->
 	</rd-widget-footer>
